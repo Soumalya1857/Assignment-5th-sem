@@ -32,6 +32,9 @@ def VRC(filename):
     if flag: print("File received successfully!")
     outFile.close()
 
+    if flag: return 1
+    else: return 0
+
 
 ################################################
 #LRC
@@ -65,15 +68,15 @@ def LRC(filename):
             break
 
     if flag: print("File received successfully!")
-
     outFile.close()
-
+    if flag: return 1
+    else: return 0
 
 ################################################
 #CHECKSUM
 ################################################
 
-def CheckSum(filename):
+def CHECKSUM(filename):
 
     print("Decoding with CheckSum technique!")
     try:
@@ -100,6 +103,9 @@ def CheckSum(filename):
         print("Corrupted File received!\nRequest for retransmission!!")
     else: print("File received successfully!")
 
+    if not result: return 1
+    else: return 0
+
 
 ################################################
 #CRC
@@ -116,20 +122,20 @@ def CRC(filename,crc):
     flag = True
     while byte:
         byteAscii = str(bin(ord(byte)))[2:]
-        print("original byteAscii: "+ byteAscii)
+        print("ByteAscii: "+ byteAscii)
         byte = outFile.read(const.ENCODE_PACKET_SIZE)
-        print("remainder: "+str(bin(ord(byte)))[2:])
-        redundant = str(bin(ord(byte)))[2:lencrc+2]
+        print("added: "+str(bin(ord(byte)))[2:lencrc+1])
+        redundant = str(bin(ord(byte)))[2:lencrc+1]
         byteAscii += redundant # this is the value of the dividend
         print("byteAscii: " + byteAscii )
-        while(lencrc <= len(byteAscii)):
+        while lencrc <= len(byteAscii):
             if(byteAscii[0] == '0'):xorval = helper.xor('0'*lencrc, byteAscii[0:lencrc])
             else: xorval = helper.xor(crc, byteAscii[0:lencrc])
 
             if(lencrc == len(byteAscii)):
                 temp = byteAscii[1:]
                 remainder = int(temp,2)
-                print("remainder: " + str(remainder))   
+                print("remainder: " + str(temp))   
                 if(remainder != 0):
                     print("Corrupted File received!\nRequest for retransmission!")
                     flag = False
@@ -138,26 +144,28 @@ def CRC(filename,crc):
         if not flag: break
         byte = outFile.read(const.ENCODE_PACKET_SIZE)
 
-        if flag: print("File received successfullly!")
-        outFile.close()
+    if flag: print("File received successfullly!")
+    outFile.close()
+    if flag: return 1
+    else: return 0
                 
                 
     
 
 
 
-if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        sys.exit("No input file or method name passed!")
-    if len(sys.argv) > 3:
-        sys.exit("Too many arguments passed! ")
-
-
-
-    filename = sys.argv[-2]
-    checkingType = sys.argv[-1]
-
-    if checkingType.lower() == 'vrc': VRC(filename)
-    elif checkingType.lower() == 'checksum': CheckSum(filename)
-    elif checkingType.lower() == 'lrc': LRC(filename)
-    elif checkingType.lower() == 'crc': CRC(filename, "1001")
+# if __name__ == "__main__":
+    # if len(sys.argv) < 3:
+        # sys.exit("No input file or method name passed!")
+    # if len(sys.argv) > 3:
+        # sys.exit("Too many arguments passed! ")
+# 
+# 
+# 
+    # filename = sys.argv[-2]
+    # checkingType = sys.argv[-1]
+# 
+    # if checkingType.lower() == 'vrc': VRC(filename)
+    # elif checkingType.lower() == 'checksum': CheckSum(filename)
+    # elif checkingType.lower() == 'lrc': LRC(filename)
+    # elif checkingType.lower() == 'crc': CRC(filename, "1001")
