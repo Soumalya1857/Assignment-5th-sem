@@ -149,7 +149,7 @@ def CRC(filename, crc):
     while byte:
 
         byteAscii = str(bin(ord(byte)))[2:]
-        print("Byteascii: "+byteAscii)
+        #print("Byteascii: "+byteAscii)
         outFile.write(int(ord(byte)).to_bytes(1,byteorder='big'))
         while lencrc <= len(byteAscii):
             if(byteAscii[0] == '0'): xorval = helper.xor('0'*lencrc, byteAscii[0:lencrc])
@@ -159,11 +159,11 @@ def CRC(filename, crc):
                 temp = xorval[1:]
                 #temp1 = byteAscii+temp
                 #baba.append(temp1)
-                print("before left shift: "+ temp)
+                #print("before left shift: "+ temp)
                 byteWrite = int(temp,2)
                 #print(temp)
-                print("added: "+ str(bin(byteWrite))[2:])
-                print("##############", counter)
+                #print("added: "+ str(bin(byteWrite))[2:])
+                #print("##############", counter)
                 counter+=1
                 outFile.write(byteWrite.to_bytes(1, byteorder='big'))
             byteAscii = xorval[1:] + byteAscii[lencrc:]
@@ -174,6 +174,29 @@ def CRC(filename, crc):
     print("CRC added to the text file!")
     # for word in baba:
         # print(word)
+#############################################
+
+def CRCinterface(filename):
+    count = 1
+    print("Input CRC polynomial: ")
+    for key in helper.crcList.keys():
+        print("{0}) {1}".format(count, key))
+        count += 1
+    
+    num = int(input("Enter the Number: "))
+    num -=1
+    #print("num: " + str(num))
+    crc = ''
+    count = 0
+    for key in helper.crcList.keys():
+        #print("key:" + helper.crcList[key])
+        if(count == num):
+            crc = helper.crcList[key]
+            break
+        count += 1
+    #print("CRC is:"+crc)
+    CRC(filename,crc)
+    return crc
 
 
 
@@ -191,6 +214,6 @@ if __name__ == "__main__":
     if checkingType.lower() == 'vrc': VRC(filename)
     elif checkingType.lower() == 'checksum': CHECKSUM(filename)
     elif checkingType.lower() == 'lrc': LRC(filename)
-    elif checkingType.lower() == 'crc': CRC(filename, "1001")
+    elif checkingType.lower() == 'crc': CRCinterface(filename)
         
     
