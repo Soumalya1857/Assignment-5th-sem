@@ -157,14 +157,7 @@ def CRC(filename, crc):
 # 
             if(lencrc == len(byteAscii)):
                 temp = xorval[1:]
-                #temp1 = byteAscii+temp
-                #baba.append(temp1)
-                #print("before left shift: "+ temp)
                 byteWrite = int(temp,2)
-                #print(temp)
-                #print("added: "+ str(bin(byteWrite))[2:])
-                #print("##############", counter)
-                counter+=1
                 outFile.write(byteWrite.to_bytes(1, byteorder='big'))
             byteAscii = xorval[1:] + byteAscii[lencrc:]
         byte = inFile.read(const.ENCODE_PACKET_SIZE)
@@ -172,8 +165,6 @@ def CRC(filename, crc):
     inFile.close()
     outFile.close()
     print("CRC added to the text file!")
-    # for word in baba:
-        # print(word)
 #############################################
 
 def CRCinterface(filename):

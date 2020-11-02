@@ -1,6 +1,7 @@
 import sys
 sys.path.append('../package')
 import const, helper
+from colorama import Fore,Style
 
 ################################################
 #VRC
@@ -23,13 +24,20 @@ def VRC(filename):
         parity = int.from_bytes(byte, byteorder='big')
         res += str(bin(parity))[2:]
         if helper.checkParity(res) == False:
-            print("Corrupted File Received!\n Request for retransmission!")
+            print(Fore.CYAN+"###############MSG############")
+            print(Fore.RED+"Corrupted File Received!\n Request for retransmission!")
+            print(Fore.CYAN+"##############################")
+            Style.RESET_ALL
             flag = False
             break
         byte = outFile.read(const.ENCODE_PACKET_SIZE)
 
         #print(byteVal)
-    if flag: print("File received successfully!")
+    if flag: 
+        print(Fore.CYAN+"###############MSG############")
+        print(Fore.GREEN+"File received successfully!")
+        print(Fore.CYAN+"##############################")
+    Style.RESET_ALL
     outFile.close()
 
     if flag: return 1
@@ -63,11 +71,18 @@ def LRC(filename):
             bit = (data & (1<<i)) >> i
             count += bit
         if count %2 == 1: 
-            print("Corrupted File received!\nRequest for retransmission!")
+            print(Fore.CYAN+"###############MSG############")
+            print(Fore.RED + "Corrupted File received!\nRequest for retransmission!")
+            print(Fore.CYAN+"##############################")
+            Style.RESET_ALL
             flag = False
             break
 
-    if flag: print("File received successfully!")
+    if flag: 
+        print(Fore.CYAN+"###############MSG############")
+        print(Fore.GREEN+"File received successfully!")
+        print(Fore.CYAN+"##############################")
+    Style.RESET_ALL
     outFile.close()
     if flag: return 1
     else: return 0
@@ -99,10 +114,15 @@ def CHECKSUM(filename):
     
     #calculating complement
     result = 255-result
-    if(result != 0): 
-        print("Corrupted File received!\nRequest for retransmission!!")
-    else: print("File received successfully!")
-
+    if(result != 0):
+        print(Fore.CYAN+"###############MSG############") 
+        print(Fore.RED+"Corrupted File received!\nRequest for retransmission!!")
+        print(Fore.CYAN+"##############################")
+    else: 
+        print(Fore.CYAN+"###############MSG############")
+        print(Fore.GREEN+"File received successfully!")
+        print(Fore.CYAN+"##############################")
+    Style.RESET_ALL
     if not result: return 1
     else: return 0
 
@@ -120,52 +140,54 @@ def CRC(filename,crc):
     byte = outFile.read(const.ENCODE_PACKET_SIZE)
     lencrc = len(crc)
     flag = True
+    #counter = 1
     while byte:
         byteAscii = str(bin(ord(byte)))[2:]
-        print("ByteAscii: "+ byteAscii)
         byte = outFile.read(const.ENCODE_PACKET_SIZE)
-        print("added: "+str(bin(ord(byte)))[2:lencrc+1])
-        redundant = str(bin(ord(byte)))[2:lencrc+1]
+        redun = str(bin(ord(byte)))[2:]
+        redun = helper.pad(redun,lencrc=lencrc)
+        lenred = len(redun)
+        redundant = redun[lenred-(lencrc-1):]
         byteAscii += redundant # this is the value of the dividend
-        print("byteAscii: " + byteAscii )
         while lencrc <= len(byteAscii):
             if(byteAscii[0] == '0'):xorval = helper.xor('0'*lencrc, byteAscii[0:lencrc])
             else: xorval = helper.xor(crc, byteAscii[0:lencrc])
 
             if(lencrc == len(byteAscii)):
-                temp = byteAscii[1:]
+                temp = xorval[1:]
                 remainder = int(temp,2)
-                print("remainder: " + str(temp))   
                 if(remainder != 0):
-                    print("Corrupted File received!\nRequest for retransmission!")
+                    print(Fore.CYAN+"###############MSG############")
+                    print(Fore.RED+"Corrupted File received!\nRequest for retransmission!")
+                    print(Fore.CYAN+"##############################")
                     flag = False
                     break
             byteAscii = xorval[1:] + byteAscii[lencrc:]
         if not flag: break
         byte = outFile.read(const.ENCODE_PACKET_SIZE)
 
-    if flag: print("File received successfullly!")
+    if flag: print(Fore.GREEN+"File received successfullly!")
+    Style.RESET_ALL
     outFile.close()
     if flag: return 1
     else: return 0
                 
                 
     
+############################
+
+if __name__ == "__main__":
+    if len(sys.argv) < 3:
+        sys.exit("No input file or method name passed!")
+    if len(sys.argv) > 3:
+        sys.exit("Too many arguments passed! ")
 
 
 
-# if __name__ == "__main__":
-    # if len(sys.argv) < 3:
-        # sys.exit("No input file or method name passed!")
-    # if len(sys.argv) > 3:
-        # sys.exit("Too many arguments passed! ")
-# 
-# 
-# 
-    # filename = sys.argv[-2]
-    # checkingType = sys.argv[-1]
-# 
-    # if checkingType.lower() == 'vrc': VRC(filename)
-    # elif checkingType.lower() == 'checksum': CheckSum(filename)
-    # elif checkingType.lower() == 'lrc': LRC(filename)
-    # elif checkingType.lower() == 'crc': CRC(filename, "1001")
+    filename = sys.argv[-2]
+    checkingType = sys.argv[-1]
+
+    if checkingType.lower() == 'vrc': VRC(filename)
+    elif checkingType.lower() == 'checksum': CHECKSUM(filename)
+    elif checkingType.lower() == 'lrc': LRC(filename)
+    elif checkingType.lower() == 'crc': CRC(filename, "1001")
