@@ -11,13 +11,15 @@ class Packet:
         self.sender = sender
         self.dest = dest
 
-
- # segment data need to be in string
- # byte = file.read(1)...segmentdata += str(byte)
- # everythong has to be in string
- # preamble + sfd + dest + source + seq + len + data + cksum
- #  7       +  1  + 8    +   8    + 1   + 1   + 36   +  2 = 64
- # returns packet obj
+# """
+#  segment data need to be in string
+#  byte = file.read(1)...segmentdata += str(byte)
+#  everythong has to be in string
+#  preamble + sfd + dest + source + seq + len + data + cksum
+#   7       +  1  + 8    +   8    + 1   + 1   + 36   +  2 = 64
+#   returns packet obj
+# """
+ ###############################
     def makePacket(self):
         preamble = '01'*28 # 6 bytes of alternating 01
         sfd = '10101011' # start frame delimeter
@@ -42,19 +44,25 @@ class Packet:
     
     def extrctData(self):
         text = ""
-        data = self.packet[208:497]
+        data = self.packet[208:496]
         asciiData = [data[i:i+8] for i in range(0,len(data),8)]
         for letter in asciiData:
             text += chr(int(letter,2))
         return text
+    
+    def decodeLength(self):
+        return len(self.segmentData)
 
+    def decodeSeqNo(self):
+        seqNo = self.packet[192:200]
+        return int(seqNo,2)
     def decodeDestAddress(self):
-        dest = self.packet[64:129]
+        dest = self.packet[64:128]
         destAddress = int(dest,2)
         return destAddress
     
     def decodeSourceAddress(self):
-        source = self.packet[128:193]
+        source = self.packet[128:192]
         sourceAddress = int(source,2)
         return sourceAddress
     
