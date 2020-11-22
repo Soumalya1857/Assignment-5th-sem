@@ -1,5 +1,5 @@
-totalSenderNumber = 1
-totalReceiverNumber = 1
+totalSenderNumber = 5
+totalReceiverNumber = 5
 defaultDataPacketSize = 36
 senderTimeout = 2
 
@@ -11,6 +11,11 @@ dropOutProb = 0.1
 injectErrorProb = 0.3
 delayProb = 0.3
 delay = 0.5 # in seconds
+########################
+# For GoBackNARQ
+
+bitsForSeqNo = 8
+windowSize = 5 # 2^8-1
 
 
 

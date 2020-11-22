@@ -9,7 +9,7 @@ def fileRead(filename):
 	byte = file.read(36)
 	packet = Packet(1,1,byte,1,1).makePacket()
 	#print(packet)
-	#print(len(packet.packet))
+	#git print(len(packet.packet))
 	print(packet.checkForError())
 	file.close()
 

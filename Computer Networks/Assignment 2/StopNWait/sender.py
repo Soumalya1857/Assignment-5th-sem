@@ -19,15 +19,14 @@ class Sender:
         self.seqNo              = 0
         self.senderToChannel    = senderToChannel
         self.channelToSender    = channelToSender
-        #self.channelEvent       = channelEvent
         self.timeoutEvent       = threading.Event()
         self.endTransmitting    = False
         self.receivedAck        = False # true if ack received and verified as valid
         #self.recentPacket exists
 
     def selectReceiver(self):
-        #return random.randint(0, const.totalReceiverNumber-1)
-        return 0 # for testing with 1 sender
+        return random.randint(0, const.totalReceiverNumber-1)
+        #return 0 # for testing with 1 sender
 
     def openFile(self, filename):
         try:
