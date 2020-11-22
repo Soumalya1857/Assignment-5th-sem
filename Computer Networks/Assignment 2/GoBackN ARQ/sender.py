@@ -27,6 +27,7 @@ class Sender:
         self.pktCount               = 0
         self.totalPktCount          = 0
         self.startSendingPktEvent   = threading.Event()
+        self.seqAckNo               = 0
         #self.recentPacket exists
 
     def selectReceiver(self):
@@ -179,10 +180,11 @@ class Sender:
             else: break
             if packet.type == 1:
                 if packet.checkForError():
-                    if packet.seqNo == self.seqNo:
+                    if packet.seqNo == (self.seqAckNo+1)%const.windowSize:
                         self.receivedAck = True
                         self.timeoutEvent.set()
-                        print("(Sender{}:) Packet has been reached successfully!".format(self.name+1))
+                        self.seqAckNo = (self.seqAckNo+1)%const.windowSize
+                        print("(Sender{}:) Packet{} has been reached successfully!".format(self.name+1, (self.seqAckNo+const.windowSize-1)%const.windowSize))
                     else: # resend needed
                         #print("**********ACK PACKETS DISCARDED1********")
                         self.timeoutEvent.clear()
