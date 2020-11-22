@@ -36,9 +36,9 @@ class Channel:
     def channelizePktFromSenderToReceiver(self,sender):# sender = 0,1,2..sender address basically
         time.sleep(0.5)
         while True:    
-            print("(Channel:) {} is receiving...".format(threading.current_thread().name))
+            print("(Channel:) channel is receiving...")
             packet = self.senderToChannel[sender].recv()
-            print("(Channel:) {} got packet..yaay".format(threading.current_thread().name))
+            #print("(Channel:) {} got packet..yaay".format(threading.current_thread().name))
             receiver = packet.decodeDestAddress()
             if random.random() <= const.dropOutProb:
                 # dropout the packet
@@ -59,19 +59,20 @@ class Channel:
     def channelizeACKFromReceiverToSender(self, receiver): # receiver can be 0,1,2..
         time.sleep(0.5)
         while True:
-            print("(Channel:) {} is receiving...".format(threading.current_thread().name))
+            print("(Channel:) Channel is receiving...")
             ack = self.receiverToChannel[receiver].recv()
+            print("(Channel:) ACK Packet received!!")
             sender = ack.decodeDestAddress()
             if random.random() <= const.dropOutProb:
                 # dropout the packet
-                print("(Channel:) PACKET DROPPED OUT!")
+                print("(Channel:) ACK PACKET DROPPED OUT!")
                 self.fakeFunction()
             else:
                 if random.random() <= const.injectErrorProb:
-                    print("(Channel:) INJECTING ERROR!")
+                    print("(Channel:) ACK INJECTING ERROR!")
                     self.injectError(ack)
                 if random.random() <= const.delayProb:
-                    print("(Channel:) INTRODUCING DELAY")
+                    print("(Channel:) ACK INTRODUCING DELAY")
                     time.sleep(const.delay)
     
                 self.channelToSender[sender].send(ack)

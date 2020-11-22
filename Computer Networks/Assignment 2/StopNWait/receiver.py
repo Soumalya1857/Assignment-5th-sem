@@ -21,8 +21,8 @@ class Receiver:
         self.packetType         = {'data' : 0, 'ack' : 1}
         #self.channelEvent       = channelEvent
         self.senderList         = dict()
-        self.receiverToChannel  = receiverToChannel
-        self.channelToReceiver  = channelToReceiver
+        self.receiverToChannel  = receiverToChannel #write
+        self.channelToReceiver  = channelToReceiver #read
         self.endTransmission    = endTransmission
 
 
@@ -58,8 +58,12 @@ class Receiver:
     def startReceiving(self):
         time.sleep(0.4)
         while True:
+            #print("**************************************************")
             print("(Receiver{}:) Receiving...".format(self.name+1))
+            #print("**************************************************")
+            #print("**************************************************")
             packet = self.channelToReceiver.recv()
+            print("(Receiver{}:) PACKET RECEIVED!!".format(self.name+1))
             # check for error
             if packet.checkForError():
                 sender = decodeSender(packet)
@@ -83,4 +87,4 @@ class Receiver:
             else:
                 self.discardPacket()
             
-            if endTransmission: break
+            if self.endTransmission: break

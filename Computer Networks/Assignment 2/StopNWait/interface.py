@@ -10,7 +10,7 @@ import const
 def start():
 
     # pipe 1st obj can write....2nd obj can read
-    witeHeadOfSenderToChannelPipe = []
+    writeHeadOfSenderToChannelPipe = []
     readHeadOfSenderToChannelPipe = []
 
     writeHeadOfChannelToSenderPipe = []
@@ -25,7 +25,7 @@ def start():
 
     for i in range(const.totalSenderNumber):
         readHead, writeHead = multiprocessing.Pipe()
-        witeHeadOfSenderToChannelPipe.append(writeHead) # goes to sender
+        writeHeadOfSenderToChannelPipe.append(writeHead) # goes to sender
         readHeadOfSenderToChannelPipe.append(readHead) # goes to channel
 
         readHead, writeHead = multiprocessing.Pipe()
@@ -53,7 +53,7 @@ def start():
         sender = Sender(
             i, 
             'input'+str(i)+'.txt', 
-            witeHeadOfSenderToChannelPipe[i],
+            writeHeadOfSenderToChannelPipe[i],
             readHeadOfChannelToSenderPipe[i]
             )
 
@@ -72,6 +72,12 @@ def start():
     ############################
     # creating channel object
     ############################
+
+    # print("Length of readHeadOfSenderToChannelPipe: ", len(readHeadOfSenderToChannelPipe))
+    # print("Length of writeHeadOfChannelToSenderPipe: ", len(writeHeadOfChannelToSenderPipe))
+    # print("Length of readHeadOfReceiverToChannelPipe: ", len(readHeadOfReceiverToChannelPipe))
+    # print("Length of writeHeadOfChannelToReceiverPipe: ", len(writeHeadOfChannelToReceiverPipe))
+
     channel = Channel(
         0,
         readHeadOfSenderToChannelPipe,
@@ -79,6 +85,7 @@ def start():
         readHeadOfReceiverToChannelPipe,
         writeHeadOfChannelToReceiverPipe
     )
+
 
     #####################################################
     # multiprocessing starts
@@ -92,7 +99,7 @@ def start():
     
     for i in range(len(receiverList)):
         p = multiprocessing.Process(target=receiverList[i].startReceiving)
-        receiverList.append(p)
+        receiverProcess.append(p)
     
     channelProcess = multiprocessing.Process(target= channel.startChannel)
 

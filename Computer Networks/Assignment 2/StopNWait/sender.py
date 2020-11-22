@@ -38,7 +38,7 @@ class Sender:
         return file
 
     def resendCurrentPacket(self):
-        self.channelToSender.send(self.recentPacket)
+        self.senderToChannel.send(self.recentPacket)
 
     def putDataInPipe(self):
 
@@ -55,7 +55,7 @@ class Sender:
         while byte:
             packet = Packet(self.packetType['data'], self.seqNo, byte, self.name, self.dest).makePacket()
             self.recentPacket = packet
-            self.channelToSender.send(packet)
+            self.senderToChannel.send(packet)
             pktCount == 1
             totalPktCount += 1
             print("(Sender{}:) Packet {} has been sent!".format(self.name+1, pktCount))
@@ -86,15 +86,18 @@ class Sender:
         while True:
             #self.channelEvent.wait(const.senderTimeout)
             print("(Sender{}:) ACK checking for Packet!".format(self.name+1))
+            #packet = self.channelToSender.recv()
             if not self.endTransmitting: packet = self.channelToSender.recv()
             else: break
+            print("(Sender{}:) ACK PACKET RECEIVED!!".format(self.name + 1))
             print("BOOM!")
             if packet._type == 0:
                 if packet.checkForError():
-                    if packet.seqNo == self.seqNo:
+                    if packet.seqNo == (self.seqNo+1)%2:
                         #self.channelEvent.clear()
                         self.timeoutEvent.set()
                         self.receivedAck = True
+                        print("**************SEND SEND SEND**************")
                     else: # resend needed
                         #self.resendCurrentPacket()
                         #self.timeoutEvent.set()
