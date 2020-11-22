@@ -38,16 +38,15 @@ class Channel:
         while True:    
             print("(Channel:) channel is receiving...")
             packet = self.senderToChannel[sender].recv()
-            #print("(Channel:) {} got packet..yaay".format(threading.current_thread().name))
             receiver = packet.decodeDestAddress()
             if random.random() <= const.dropOutProb:
                 # dropout the packet
                 print("(Channel:) PACKET DROPPED OUT!")
                 self.fakeFunction()
             else:
-                if random.random() <= const.injectErrorProb:
-                    print("(Channel:) INJECTING ERROR!")
-                    self.injectError(packet)
+                # if random.random() <= const.injectErrorProb:
+                #     print("(Channel:) INJECTING ERROR!")
+                #     self.injectError(packet)
 
                 if random.random() <= const.delayProb:
                     print("(Channel:) INTRODUCING DELAY")                        
@@ -61,16 +60,15 @@ class Channel:
         while True:
             print("(Channel:) Channel is receiving...")
             ack = self.receiverToChannel[receiver].recv()
-            #print("(Channel:) ACK Packet received!!")
             sender = ack.decodeDestAddress()
             if random.random() <= const.dropOutProb:
                 # dropout the packet
                 print("(Channel:) ACK PACKET DROPPED OUT!")
                 self.fakeFunction()
             else:
-                if random.random() <= const.injectErrorProb:
-                    print("(Channel:) ACK INJECTING ERROR!")
-                    self.injectError(ack)
+                # if random.random() <= const.injectErrorProb:
+                #     print("(Channel:) ACK INJECTING ERROR!")
+                #     self.injectError(ack)
                 if random.random() <= const.delayProb:
                     print("(Channel:) ACK INTRODUCING DELAY")
                     time.sleep(const.delay)

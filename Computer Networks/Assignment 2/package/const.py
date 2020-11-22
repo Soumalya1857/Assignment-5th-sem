@@ -9,7 +9,7 @@ outFilePath = "/home/soumalya/Desktop/MotherFolder/Assignment-5th-sem/Computer N
 # channel const
 dropOutProb = 0.1
 injectErrorProb = 0.3
-delayProb = 0.5
+delayProb = 0.3
 delay = 0.5 # in seconds
 
 

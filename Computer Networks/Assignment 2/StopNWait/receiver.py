@@ -67,10 +67,10 @@ class Receiver:
             #print("**************************************************")
             #print("**************************************************")
             packet = self.channelToReceiver.recv()
-            # print("(Receiver{}:) PACKET RECEIVED!!".format(self.name+1))
+            print("(Receiver{}:) PACKET RECEIVED!!".format(self.name+1))
             # check for error
             if packet.checkForError():
-                # print("(Receiver{}:) ERROR CHECKED!!".format(self.name+1))
+                print("(Receiver{}:) ERROR CHECKED!!".format(self.name+1))
                 sender = self.decodeSender(packet)
                 seqNo = self.decodeSeqNo(packet)
                 if self.seqNo == seqNo:
@@ -90,9 +90,9 @@ class Receiver:
                 else:
                     self.resendPreviousACK()
                     # print("(Receiver{}:) Sequence No matched!!".format(self.name+1))
-                    # print("(Receiver{}:) ACK RESENDED!".format(self.name+1))
+                    print("(Receiver{}:) ACK RESENDED!".format(self.name+1))
             else:
                 self.discardPacket()
-                # print("(Receiver{}:) PACKET DISCARDED2!!".format(self.name+1))
+                print("(Receiver{}:) PACKET DISCARDED2!!".format(self.name+1))
             
             if self.endTransmission: break

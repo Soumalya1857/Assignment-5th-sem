@@ -45,7 +45,7 @@ class Sender:
         time.sleep(0.2)
         print("***********************************")
         print("Sender{} starts sending data to Receiver{}".format(self.name+1, self.dest+1))
-        print("***********************************\n\n")
+        print("***********************************")
         file = self.openFile(self.fileName)
 
         byte = file.read(const.defaultDataPacketSize)
@@ -90,7 +90,7 @@ class Sender:
                 if packet.checkForError():
                     if packet.seqNo == self.seqNo:
                         self.timeoutEvent.set()
-                        print("(Sender{}:) ")
+                        print("(Sender{}:) Packet has been reached successfully!".format(self.name+1))
                     else: # resend needed
                         #print("**********ACK PACKETS DISCARDED1********")
                         self.timeoutEvent.clear()

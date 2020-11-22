@@ -21,7 +21,7 @@ class Packet:
 # """
  ###############################
     def makePacket(self):
-        preamble = '01'*28 # 6 bytes of alternating 01
+        preamble = '01'*28 # 7 bytes of alternating 01
         sfd = '10101011' # start frame delimeter
         seqToBits = '{0:08b}'.format(int(self.seqNo))
         destAddress = '{0:064b}'.format(int(self.dest))
@@ -29,13 +29,25 @@ class Packet:
         lenToBits = '{0:08b}'.format(length)
         sourceAddress = '{0:064b}'.format(int(self.sender))
         data = ""
-        for i in range(1, len(self.segmentData)-1):
-            character = self.segmentData[i-1]
+        #print(len(self.segmentData))
+        for i in range(0, len(self.segmentData)):
+            character = self.segmentData[i]
             dataByte = '{0:08b}'.format(ord(character))
             data = data + dataByte
+        #     print("datalen:" + str(len(data)))
+        # print(len(preamble))
+        # print(len(sfd))
+        # print(len(destAddress))
+        # print(len(sourceAddress))
+        # print(len(seqToBits))
+        # print(len(lenToBits))
+        # print(len(data))
         packet = preamble + sfd + destAddress + sourceAddress + seqToBits + lenToBits + data    
         ckSum = helper.checkSum(packet)
+        # print(len(ckSum))
+        # print("Cksum:" + ckSum)
         packet = packet + ckSum
+        # print(len(packet))
         self.packet = packet
         return self
 
