@@ -42,7 +42,7 @@ class Packet:
     def __str__(self):
         return str(self.packet)
     
-    def extrctData(self):
+    def extractData(self):
         text = ""
         data = self.packet[208:496]
         asciiData = [data[i:i+8] for i in range(0,len(data),8)]

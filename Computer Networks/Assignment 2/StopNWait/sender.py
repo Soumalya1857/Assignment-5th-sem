@@ -56,21 +56,21 @@ class Sender:
             packet = Packet(self.packetType['data'], self.seqNo, byte, self.name, self.dest).makePacket()
             self.recentPacket = packet
             self.senderToChannel.send(packet)
-            pktCount == 1
+            self.seqNo = (self.seqNo+1)%2
+            pktCount += 1
             totalPktCount += 1
             print("(Sender{}:) Packet {} has been sent!".format(self.name+1, pktCount))
             while not self.receivedAck: # timeout does happen
                 #resend needed
                 self.timeoutEvent.wait(const.senderTimeout)# if timeout resend
                 time.sleep(0.2)
-                if not self.receivedAck: 
+                if not self.timeoutEvent.isSet(): 
                     self.resendCurrentPacket()
                     totalPktCount += 1
                     print("(Sender{}:) Packet {} has been resending!".format(self.name+1,pktCount))
                 else: break
             self.timeoutEvent.clear()
 
-            self.seqNo = (self.seqNo+1)%2
             byte = file.read(const.defaultDataPacketSize)
         
         self.endTransmitting = True
@@ -84,35 +84,24 @@ class Sender:
     def checkAckPackets(self):
         time.sleep(0.2)
         while True:
-            #self.channelEvent.wait(const.senderTimeout)
-            print("(Sender{}:) ACK checking for Packet!".format(self.name+1))
-            #packet = self.channelToSender.recv()
             if not self.endTransmitting: packet = self.channelToSender.recv()
             else: break
-            print("(Sender{}:) ACK PACKET RECEIVED!!".format(self.name + 1))
-            print("BOOM!")
-            if packet._type == 0:
+            if packet.type == 1:
                 if packet.checkForError():
-                    if packet.seqNo == (self.seqNo+1)%2:
-                        #self.channelEvent.clear()
+                    if packet.seqNo == self.seqNo:
                         self.timeoutEvent.set()
-                        self.receivedAck = True
-                        print("**************SEND SEND SEND**************")
+                        print("(Sender{}:) ")
                     else: # resend needed
-                        #self.resendCurrentPacket()
-                        #self.timeoutEvent.set()
-                        self.receivedAck = False
+                        #print("**********ACK PACKETS DISCARDED1********")
                         self.timeoutEvent.clear()
                 else:
-                    #self.resendCurrentPacket()
-                    #self.timeoutEvent.set()
-                    self.receivedAck = False
                     self.timeoutEvent.clear()
+                    #print("**********ACK PACKETS DISCARDED2********")
             else: 
-                #self.resendCurrentPacket()
-                #self.timeoutEvent.set()
-                self.receivedAck = False
                 self.timeoutEvent.clear()
+                #print("**********ACK PACKETS DISCARDED3********")
+            
+            #self.receivedAck = False
             
 
 

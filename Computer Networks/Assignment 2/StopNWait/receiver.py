@@ -29,11 +29,15 @@ class Receiver:
     def sendAck(self, sender, seqNo):
         packet = Packet(_type=self.packetType['ack'],
                         seqNo=seqNo,
-                        segmentData='',
+                        segmentData='acknowledgement Packet',
                         sender=self.name,
-                        dest=sender)
-
+                        dest=sender).makePacket()
+        
+        self.recentACK = packet
         self.receiverToChannel.send(packet)
+    
+    def resendPreviousACK(self):
+        self.receiverToChannel.send(self.recentACK)
 
 
     def openFile(self, filepath):
@@ -49,7 +53,7 @@ class Receiver:
         return senderAddress
     
     def decodeSeqNo(self, packet):
-        return packet.decodeSeqno()
+        return packet.decodeSeqNo()
 
     def discardPacket(self):
         return 0
@@ -63,10 +67,11 @@ class Receiver:
             #print("**************************************************")
             #print("**************************************************")
             packet = self.channelToReceiver.recv()
-            print("(Receiver{}:) PACKET RECEIVED!!".format(self.name+1))
+            # print("(Receiver{}:) PACKET RECEIVED!!".format(self.name+1))
             # check for error
             if packet.checkForError():
-                sender = decodeSender(packet)
+                # print("(Receiver{}:) ERROR CHECKED!!".format(self.name+1))
+                sender = self.decodeSender(packet)
                 seqNo = self.decodeSeqNo(packet)
                 if self.seqNo == seqNo:
                     if sender not in self.senderList.keys():
@@ -80,11 +85,14 @@ class Receiver:
                     file.write(data)
                     file.close()
                     self.seqNo = (self.seqNo+1)%2
-
                     self.sendAck(sender,self.seqNo)
+                    print("(Receiver{}:) ACK SENT FROM RECEIVER!!".format(self.name+1))
                 else:
-                    self.discardPacket()
+                    self.resendPreviousACK()
+                    # print("(Receiver{}:) Sequence No matched!!".format(self.name+1))
+                    # print("(Receiver{}:) ACK RESENDED!".format(self.name+1))
             else:
                 self.discardPacket()
+                # print("(Receiver{}:) PACKET DISCARDED2!!".format(self.name+1))
             
             if self.endTransmission: break

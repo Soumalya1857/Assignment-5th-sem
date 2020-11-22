@@ -61,7 +61,7 @@ class Channel:
         while True:
             print("(Channel:) Channel is receiving...")
             ack = self.receiverToChannel[receiver].recv()
-            print("(Channel:) ACK Packet received!!")
+            #print("(Channel:) ACK Packet received!!")
             sender = ack.decodeDestAddress()
             if random.random() <= const.dropOutProb:
                 # dropout the packet
