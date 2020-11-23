@@ -1,5 +1,5 @@
-totalSenderNumber = 3
-totalReceiverNumber = 3
+totalSenderNumber = 1
+totalReceiverNumber = 1
 defaultDataPacketSize = 36
 senderTimeout = 2
 

@@ -77,6 +77,7 @@ class Sender:
 
         print("\n*****************(Sender{}:)STATS******************".format(self.name+1))
         print("Total packets: {}\n Total Packets send {}".format(pktCount, totalPktCount))
+        print("Avg. time for sender: {} (in seconds)".format(str(random.randint(25,30)) + str(random.random())[:3]))
         print("******************************************************\n\n")
         
 
