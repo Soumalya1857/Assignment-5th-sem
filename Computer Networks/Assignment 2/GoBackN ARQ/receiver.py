@@ -93,6 +93,6 @@ class Receiver:
                     print("(Receiver{}:) ACK RESENDED!".format(self.name+1))
             else:
                 self.discardPacket()
-                print("(Receiver{}:) PACKET DISCARDED2!!".format(self.name+1))
+                print("(Receiver{}:) PACKET DISCARDED!!".format(self.name+1))
             
             if self.endTransmission: break

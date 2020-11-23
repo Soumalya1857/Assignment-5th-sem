@@ -23,11 +23,11 @@ class Sender:
         self.endTransmitting        = False
         self.receivedAck            = False # true if ack received and verified as valid
         self.recentPacketQueue      = []
-        self.vector                 = []
         self.pktCount               = 0
         self.totalPktCount          = 0
         self.startSendingPktEvent   = threading.Event()
         self.seqAckNo               = 0
+        self.endTransmission        = threading.Event()
         #self.recentPacket exists
 
     def selectReceiver(self):
@@ -89,7 +89,7 @@ class Sender:
     # queue.pop(0)
 
     def putDataInPipe(self):
-        time.sleep(0.2)
+        time.sleep(0.4)
         print("***********************************")
         print("Sender{} starts sending data to Receiver{}".format(self.name+1, self.dest+1))
         print("***********************************")
@@ -100,50 +100,73 @@ class Sender:
         
         while byte:
             packet = Packet(self.packetType['data'], self.seqNo, byte, self.name, self.dest).makePacket()
-            pktCount += 1
-            totalPktCount += 1
-            if len(self.recentPacketQueue < const.windowSize):
+    
+            if len(self.recentPacketQueue) < const.windowSize:
+                #print("(Sender{}:) Packet send to queue!".format(self.name+1))
+                
                 self.recentPacketQueue.append(packet)
+                #print("length of queue1: {}".format(len(self.recentPacketQueue)))
                 self.vector.append(0)
                 self.senderToChannel.send(packet)
                 self.seqNo = (self.seqNo + 1) % const.windowSize
-                pktCount += 1
-                totalPktCount += 1
+                self.pktCount += 1
+                self.totalPktCount += 1
             
             else:
             # sleep
+                #print("(Sender{}:) Sender is sleeping for queue to release!".format(self.name+1))
                 self.startSendingPktEvent.wait()
-            
+                self.recentPacketQueue.append(packet)
+                #print("length of queue2: {}".format(len(self.recentPacketQueue)))
+                self.vector.append(0)
+                self.senderToChannel.send(packet)
+                self.seqNo = (self.seqNo + 1) % const.windowSize
+                self.pktCount += 1
+                self.totalPktCount += 1
+
+            #print("(Sender{}:) Thread released!".format(self.name+1))
             byte = file.read(const.defaultDataPacketSize)
         
         file.close()
+        self.endTransmission.wait()
+        print("\n*****************(Sender{}:)STATS******************".format(self.name+1))
+        print("Total packets: {}\n Total Packets send {}".format(self.pktCount, self.totalPktCount))
+        print("******************************************************\n\n")
+        
 
     def sleepOnQueue(self):
-        time.sleep(0.4)
-        i = 0
+        time.sleep(0.5)
         while True:
-            if len(self.vector) > i:
-                if self.vector[i] == 0:
-                    while not self.receivedAck:
-                        # ack not received
-                        self.timeoutEvent.wait(const.senderTimeout)
-                        if not self.timeoutEvent.isSet():
-                            # resend needed
-                            packet = self.recentPacketQueue[i]
-                            self.senderToChannel.send(packet)
-                            self.totalPktCount += 1
-                            print("(Sender{}:) Packet{} resending!!".format(self.name + 1, self.pktCount))
-                        else: 
-                            self.recentPacketQueue.pop(0)
-                            self.startSendingPktEvent.set()
-                            time.sleep(0.1)
-                            self.startSendingPktEvent.clear()
-                            self.timeoutEvent.clear()
-                            self.vector[i] = 1 #indicate i got packet i
-                else:
-                    i+=1
+            if len(self.recentPacketQueue) > 0:
+                #if self.vector[i] == 0:
+                while not self.receivedAck:
+                    # ack not received
+                    self.timeoutEvent.wait(const.senderTimeout)
+                    if not self.timeoutEvent.isSet():
+                        # resend needed
+                        #print("Length of QUEUE: ",len(self.recentPacketQueue))
+                        if len(self.recentPacketQueue) == 0:
+                            self.endTransmission.set()
+                            break
+                        packet = self.recentPacketQueue[0]
+                        self.senderToChannel.send(packet)
+                        self.totalPktCount += 1
+                        print("(Sender{}:) Packet{} resending!!".format(self.name + 1, self.pktCount))
+                    else: 
+                        #print("*****I AM HERE1*********")
+                        self.recentPacketQueue.pop(0)
+                        self.startSendingPktEvent.set()
+                        #time.sleep(0.1)
+                        self.startSendingPktEvent.clear()
+                        self.timeoutEvent.clear()
+                        #self.vector[i] = 1 #indicate i got packet i
+            # else:
+            #     i+=1
+            #         print("*****I AM HERE2*********")
             else:
                 self.endTransmitting = True
+                #print("*****I AM HERE3*********")
+                self.endTransmission.set()
                 break
 
 
