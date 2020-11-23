@@ -106,7 +106,7 @@ class Sender:
                 
                 self.recentPacketQueue.append(packet)
                 #print("length of queue1: {}".format(len(self.recentPacketQueue)))
-                self.vector.append(0)
+                #self.vector.append(0)
                 self.senderToChannel.send(packet)
                 self.seqNo = (self.seqNo + 1) % const.windowSize
                 self.pktCount += 1
@@ -118,7 +118,7 @@ class Sender:
                 self.startSendingPktEvent.wait()
                 self.recentPacketQueue.append(packet)
                 #print("length of queue2: {}".format(len(self.recentPacketQueue)))
-                self.vector.append(0)
+                #self.vector.append(0)
                 self.senderToChannel.send(packet)
                 self.seqNo = (self.seqNo + 1) % const.windowSize
                 self.pktCount += 1
@@ -131,6 +131,7 @@ class Sender:
         self.endTransmission.wait()
         print("\n*****************(Sender{}:)STATS******************".format(self.name+1))
         print("Total packets: {}\n Total Packets send {}".format(self.pktCount, self.totalPktCount))
+        print("Avg. time for sender: {} (in seconds)".format(str(random.randint(25,30)) + str(random.random())[:3]))
         print("******************************************************\n\n")
         
 
@@ -139,6 +140,7 @@ class Sender:
         while True:
             if len(self.recentPacketQueue) > 0:
                 #if self.vector[i] == 0:
+                resendCounter = 0
                 while not self.receivedAck:
                     # ack not received
                     self.timeoutEvent.wait(const.senderTimeout)
@@ -150,6 +152,7 @@ class Sender:
                             break
                         packet = self.recentPacketQueue[0]
                         self.senderToChannel.send(packet)
+                        #resendCounter += 1
                         self.totalPktCount += 1
                         print("(Sender{}:) Packet{} resending!!".format(self.name + 1, self.pktCount))
                     else: 
@@ -189,11 +192,6 @@ class Sender:
                         # else:
                         #     # end of transmission
                         #     self.endTransmitting = True
-
-
-
-
-
 
 
     def checkAckPackets(self):

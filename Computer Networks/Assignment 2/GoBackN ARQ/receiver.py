@@ -37,7 +37,15 @@ class Receiver:
         self.receiverToChannel.send(packet)
     
     def resendPreviousACK(self):
-        self.receiverToChannel.send(self.recentACK)
+        try:
+            self.receiverToChannel.send(self.recentACK)
+        except AttributeError:
+            packet = Packet(_type=self.packetType['ack'],
+                        seqNo=self.seqNo,
+                        segmentData='acknowledgement Packet',
+                        sender=self.name,
+                        dest=1).makePacket()
+            self.receiverToChannel.send(packet)
 
 
     def openFile(self, filepath):
@@ -88,6 +96,7 @@ class Receiver:
                     self.sendAck(sender,self.seqNo)
                     print("(Receiver{}:) ACK SENT FROM RECEIVER!!".format(self.name+1))
                 else:
+
                     self.resendPreviousACK()
                     # print("(Receiver{}:) Sequence No matched!!".format(self.name+1))
                     print("(Receiver{}:) ACK RESENDED!".format(self.name+1))
