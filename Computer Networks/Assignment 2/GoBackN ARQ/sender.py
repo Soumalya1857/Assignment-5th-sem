@@ -102,7 +102,7 @@ class Sender:
             packet = Packet(self.packetType['data'], self.seqNo, byte, self.name, self.dest).makePacket()
     
             if len(self.recentPacketQueue) < const.windowSize:
-                #print("(Sender{}:) Packet send to queue!".format(self.name+1))
+                print("(Sender{}:) Packet send to queue!".format(self.name+1))
                 
                 self.recentPacketQueue.append(packet)
                 print("length of queue1: {}".format(len(self.recentPacketQueue)))
