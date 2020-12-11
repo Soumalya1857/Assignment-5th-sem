@@ -12,9 +12,14 @@ MainWindow::MainWindow(QWidget *parent):
 
     //this->viewport()->setMouseTracking(true);
     ui->setupUi(this);
-    setWindowTitle("Pixel Grid");
+    setWindowTitle("Grid");
+    //setAutoFillBackground(true);
     //resize(520, 550);
+    setStyleSheet("background-color:pink;");
     connect(ui->frame, &frame_widget::sendCoord, this, &MainWindow::showCoord);
+    connect(ui->frame, &frame_widget::sendTimeDDA, this, &MainWindow::showDDATime);
+    connect(ui->frame, &frame_widget::sendTimeBresh, this, &MainWindow::showBreshTime);
+    connect(ui->frame, &frame_widget::sendCoordForMousePress, this, &MainWindow::showCoordForMousePressEvent);
     connect(this, &MainWindow::changeColour, ui->frame, &frame_widget::changeCurrentColour);
     connect(this, &MainWindow::drawLinePressedDDA, ui->frame, &frame_widget::drawLineDDA);
     connect(this, &MainWindow::drawLinePressedBresh, ui->frame, &frame_widget::drawLineBresh);
@@ -88,9 +93,23 @@ void MainWindow::showCoord(int x, int y)
 }
 
 
+void MainWindow::showCoordForMousePressEvent(int x, int y)
+{
+    //std::cout << "hi I am from hyd mama";
+    ui->label_3->setText("X : "+QString::number(x) + " Y : " + QString::number(y));
+}
 
+void MainWindow::showDDATime(double time)
+{
+    time = time/1000;
+    ui->label_5->setText(QString::number(time) + " ms");
+}
 
-
+void MainWindow::showBreshTime(double time)
+{
+    time = time/1000;
+    ui->label_6->setText(QString::number(time) +" ms");
+}
 
 void MainWindow::on_spinBox_valueChanged(int arg1)
 {

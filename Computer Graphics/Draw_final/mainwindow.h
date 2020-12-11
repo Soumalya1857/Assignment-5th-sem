@@ -79,12 +79,16 @@ public:
 
     void on_pushButton_5_clicked();
 
+
 private:
     Ui::MainWindow *ui;
     //frame_widget *gridFrame;
 
 public slots:
     void showCoord(int x , int y );
+    void showCoordForMousePressEvent(int x, int y);
+    void showDDATime(double time);
+    void showBreshTime(double time);
 
 
 signals:

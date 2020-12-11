@@ -6,12 +6,14 @@ main proc
 mov ah,01h
 int 21h
 mov bl,al
-mov dl,0ah
+
+mov dl,0ah  
 mov ah,02h
 int 21h
 mov dl,0dh
 mov ah,02h
 int 21h
+
 mov dl,bl
 mov ah,02h
 int 21h

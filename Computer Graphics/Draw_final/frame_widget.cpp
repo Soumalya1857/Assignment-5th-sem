@@ -1,5 +1,7 @@
 #include "frame_widget.h"
 #include <bits/stdc++.h>
+#include "time.h"
+#include <chrono>
 QPoint frame_widget::convertPixel(QPoint p)
 {
     QPoint pos = p;
@@ -138,8 +140,10 @@ int min(int a, int b){
 }
 void frame_widget::paintEvent(QPaintEvent *p)
 {
+
     //QPixmap pix(500, 500);
     QPainter paint(this);
+    //paint.setPen(Qt::white);
     //pix.fill(Qt::white);
     paint.drawRect(0, 0, min(maxheight, 500), min(maxwidth, 500));
 
@@ -169,6 +173,7 @@ void frame_widget::paintEvent(QPaintEvent *p)
         }
         if(lineDDA)
         {
+            auto time1 = std::chrono::high_resolution_clock::now();
             paint.setBrush(QBrush(currentcol));
             double x = point1.x();
             double y = point1.y();
@@ -199,10 +204,13 @@ void frame_widget::paintEvent(QPaintEvent *p)
                 //paint.drawRect(p0.x(), p0.y(), size, size);
             }
             lineDDA = false;
+            auto time2 = std::chrono::high_resolution_clock::now();
+            double timeDiff = (time2-time1).count();
+            emit sendTimeDDA(timeDiff);
         }
         if(lineBresh)
         {
-            //auto time1 = std::chrono::high_resolution_clock::now();
+            auto time1 = std::chrono::high_resolution_clock::now();
             QPoint p1 = point1;
             QPoint p2 = point2;
             int k = size;
@@ -261,6 +269,10 @@ void frame_widget::paintEvent(QPaintEvent *p)
 
             modified = true;
             lineBresh = false;
+            auto time2 = std::chrono::high_resolution_clock::now();
+            double timeDiff = (time2-time1).count();
+            emit sendTimeBresh(timeDiff);
+
         }
         if(modified)
         {
@@ -286,7 +298,11 @@ void frame_widget::mousePressEvent(QMouseEvent *event)
        return;
    //QColor colour(Qt::red);
    points.append({lastpoint, currentcol});
+   QPoint p = convertPixel(lastpoint);
+   //ui->label_3->setText("X : " + QString::number(p.x()) + " Y : "+ QString::number(p.y()));
    repaint();
+   emit sendCoordForMousePress(p.x(),p.y());
+   //return convertPixel(lastpoint);
 
 }
 

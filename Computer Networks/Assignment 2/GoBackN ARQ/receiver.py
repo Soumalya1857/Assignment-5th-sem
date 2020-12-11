@@ -17,7 +17,7 @@ endTransmission is true of false depending on the status of the system
 class Receiver:
     def __init__(self, name, receiverToChannel, channelToReceiver, endTransmission):
         self.name               = name
-        self.seqNo              = 0 # need to be sync with sender
+        self.seqNo              = dict() # need to be sync with sender
         self.packetType         = {'data' : 0, 'ack' : 1}
         #self.channelEvent       = channelEvent
         self.senderList         = dict()
@@ -36,12 +36,12 @@ class Receiver:
         self.recentACK = packet
         self.receiverToChannel.send(packet)
     
-    def resendPreviousACK(self):
+    def resendPreviousACK(self,sender):
         try:
             self.receiverToChannel.send(self.recentACK)
         except AttributeError:
             packet = Packet(_type=self.packetType['ack'],
-                        seqNo=self.seqNo,
+                        seqNo=self.seqNo[sender],
                         segmentData='acknowledgement Packet',
                         sender=self.name,
                         dest=1).makePacket()
@@ -81,9 +81,10 @@ class Receiver:
                 print("(Receiver{}:) ERROR CHECKED!!".format(self.name+1))
                 sender = self.decodeSender(packet)
                 seqNo = self.decodeSeqNo(packet)
-                if self.seqNo == seqNo:
+                if self.seqNo.get(sender,0) == seqNo:
                     if sender not in self.senderList.keys():
                         self.senderList[sender] = const.outFilePath + 'output' + str(sender)
+                        self.seqNo[sender] = 0
                 
 
                     # file already added to the dict
@@ -92,12 +93,12 @@ class Receiver:
                     data = packet.extractData()
                     file.write(data)
                     file.close()
-                    self.seqNo = (self.seqNo+1)%const.windowSize
-                    self.sendAck(sender,self.seqNo)
+                    self.seqNo[sender] = (self.seqNo[sender]+1)%const.windowSize
+                    self.sendAck(sender,self.seqNo[sender])
                     print("(Receiver{}:) ACK SENT FROM RECEIVER!!".format(self.name+1))
                 else:
 
-                    self.resendPreviousACK()
+                    self.resendPreviousACK(sender)
                     # print("(Receiver{}:) Sequence No matched!!".format(self.name+1))
                     print("(Receiver{}:) ACK RESENDED!".format(self.name+1))
             else:

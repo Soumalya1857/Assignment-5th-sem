@@ -90,6 +90,7 @@ class Sender:
 
     def putDataInPipe(self):
         time.sleep(0.4)
+        startTime = time.time()
         print("***********************************")
         print("Sender{} starts sending data to Receiver{}".format(self.name+1, self.dest+1))
         print("***********************************")
@@ -129,9 +130,10 @@ class Sender:
         
         file.close()
         self.endTransmission.wait()
+        endTime = time.time()
         print("\n*****************(Sender{}:)STATS******************".format(self.name+1))
         print("Total packets: {}\n Total Packets send {}".format(self.pktCount, self.totalPktCount))
-        print("Avg. time for sender: {} (in seconds)".format(str(random.randint(18,22)) + str(random.random())[:3]))
+        print("Avg. time for sender: {} (in seconds)".format(str(endTime-startTime)[:4]))
         print("******************************************************\n\n")
         
 
@@ -147,17 +149,26 @@ class Sender:
                     if not self.timeoutEvent.isSet():
                         # resend needed
                         #print("Length of QUEUE: ",len(self.recentPacketQueue))
-                        if resendCounter == 5:
-                            self.endTransmission.set()
-                            break
+                        # if resendCounter == 5:
+                        #     self.endTransmission.set()
+                        #     break
+                        # if len(self.recentPacketQueue) == 0:
+                        #     self.endTransmission.set()
+                        #     break
+                        # packet = self.recentPacketQueue[0]
+                        # self.senderToChannel.send(packet)
+                        # resendCounter += 1
+                        # self.totalPktCount += 1
+                        # print("(Sender{}:) Packet{} resending!!".format(self.name + 1, self.pktCount))
+
+                        #resend needed for every packet in the queue
                         if len(self.recentPacketQueue) == 0:
                             self.endTransmission.set()
                             break
-                        packet = self.recentPacketQueue[0]
-                        self.senderToChannel.send(packet)
-                        resendCounter += 1
-                        self.totalPktCount += 1
-                        print("(Sender{}:) Packet{} resending!!".format(self.name + 1, self.pktCount))
+                        for pkt in self.recentPacketQueue:
+                            self.senderToChannel.send(pkt)
+                            self.totalPktCount += 1
+                            print("(Sender{}:) Packet{} resending!!".format(self.name + 1, self.pktCount))
                     else: 
                         #print("*****I AM HERE1*********")
                         self.recentPacketQueue.pop(0)
@@ -214,10 +225,10 @@ class Sender:
                         self.timeoutEvent.clear()
                 else:
                     self.timeoutEvent.clear()
-                    #print("**********ACK PACKETS DISCARDED2********")
+                    print("**********ACK PACKETS DISCARDED2********")
             else: 
                 self.timeoutEvent.clear()
-                #print("**********ACK PACKETS DISCARDED3********")
+                print("**********ACK PACKETS DISCARDED3********")
             
             self.receivedAck = False
             

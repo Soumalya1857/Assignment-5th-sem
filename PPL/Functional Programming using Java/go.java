@@ -1,4 +1,4 @@
-package Functional
+//package Functional
 
 import java.util.stream.Collectors;
 
@@ -69,6 +69,8 @@ stram.parallelStream() to parallelize things
 reduce("",(a,b)-> a+" "+b)
 ## list of word-> words with space and comma
 ## count no of lowercase chars in a string
+
+.reduce(0,(a,b)-> a+('a' <= b <= 'z')?1:0)
 
 
 

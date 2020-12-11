@@ -55,6 +55,9 @@ public:
     void drawLineBresh();
 signals:
     void sendCoord(int x, int y);
+    void sendCoordForMousePress(int x, int y);
+    void sendTimeDDA(double);
+    void sendTimeBresh(double);
 };
 
 #endif // FRAME_WIDGET_H

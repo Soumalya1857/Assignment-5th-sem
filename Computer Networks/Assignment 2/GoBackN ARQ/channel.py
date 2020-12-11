@@ -46,7 +46,7 @@ class Channel:
             else:
                 if random.random() <= const.injectErrorProb:
                     print("(Channel:) INJECTING ERROR!")
-                    self.injectError(packet)
+                    #self.injectError(packet)
 
                 if random.random() <= const.delayProb:
                     print("(Channel:) INTRODUCING DELAY")                        
@@ -68,12 +68,13 @@ class Channel:
             else:
                 if random.random() <= const.injectErrorProb:
                    print("(Channel:) ACK INJECTING ERROR!")
-                   self.injectError(ack)
+                   #self.injectError(ack)
                 if random.random() <= const.delayProb:
                     print("(Channel:) ACK INTRODUCING DELAY")
                     time.sleep(const.delay)
-    
+                print("Sender form channel: ", str(sender))
                 self.channelToSender[sender].send(ack)
+                
 
     def startChannel(self):
 
