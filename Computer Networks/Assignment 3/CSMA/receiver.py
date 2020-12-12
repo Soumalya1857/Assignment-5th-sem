@@ -7,23 +7,21 @@ import const
 from packet import *
 
 """
-receiverToChannel, channelToReceiver -> needs to be pipes
-channelEvent = need to be shared with receiver and channel
+receiverToPktDispatcher, pktDispatcherToReceiver -> needs to be pipes
 endTransmission is true of false depending on the status of the system
-
 
 """
 
 class Receiver:
-    def __init__(self, name, receiverToChannel, channelToReceiver, endTransmission):
-        self.name               = name
-        self.seqNo              = dict() # need to be sync with sender
-        self.packetType         = {'data' : 0, 'ack' : 1}
-        #self.channelEvent       = channelEvent
-        self.senderList         = dict()
-        self.receiverToChannel  = receiverToChannel #write
-        self.channelToReceiver  = channelToReceiver #read
-        self.endTransmission    = endTransmission
+    def __init__(self, name, receiverToPktDispatcher, pktDispatcherToReceiver, endTransmission):
+        self.name                       = name
+        self.seqNo                      = dict() # need to be sync with sender
+        self.packetType                 = {'data' : 0, 'ack' : 1}
+        #self.channelEvent              = channelEvent
+        self.senderList                 = dict()
+        self.receiverToPktDispatcher    = receiverToPktDispatcher #write
+        self.pktDispatcherToReceiver    = pktDispatcherToReceiver #read
+        self.endTransmission            = endTransmission
 
 
     def sendAck(self, sender, seqNo):
@@ -34,10 +32,10 @@ class Receiver:
                         dest=sender).makePacket()
         
         self.recentACK = packet
-        self.receiverToChannel.send(packet)
+        self.receiverToPktDispatcher.send(packet)
     
     def resendPreviousACK(self):
-        self.receiverToChannel.send(self.recentACK)
+        self.receiverToPktDispatcher.send(self.recentACK)
 
 
     def openFile(self, filepath):
@@ -66,7 +64,7 @@ class Receiver:
             print("(Receiver{}:) Receiving...".format(self.name+1))
             #print("**************************************************")
             #print("**************************************************")
-            packet = self.channelToReceiver.recv()
+            packet = self.pktDispatcherToReceiver.recv()
             print("(Receiver{}:) PACKET RECEIVED!!".format(self.name+1))
             # check for error
             if packet.checkForError():

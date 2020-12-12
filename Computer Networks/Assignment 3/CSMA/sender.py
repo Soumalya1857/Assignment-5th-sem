@@ -21,9 +21,9 @@ class Sender:
         self.channelToSender    = channelToSender
         self.timeoutEvent       = threading.Event()
         self.endTransmitting    = False
-        self.receivedAck        = False # true if ack received and verified as valid
-        self.idle               = idle # just a boolean value...initially true
-        self.collision          = collision # initially false
+        self.receivedAck        = False         # true if ack received and verified as valid
+        self.idle               = idle          # just a boolean value...initially true
+        self.collision          = collision     # initially false
         self.collisionCount     = collisionCount
         #self.recentPacket exists
 
@@ -41,6 +41,15 @@ class Sender:
 
     def resendCurrentPacket(self):
         self.senderToChannel.send(self.recentPacket)
+
+#*******************************************************************************************************************
+#*******************************************************************************************************************
+
+
+
+
+
+
 
     def sendDataWithOnePersistent(self, packet):
         """
@@ -79,6 +88,13 @@ class Sender:
             ###############################################################################
 
 
+
+
+
+#*******************************************************************************************************************
+#*******************************************************************************************************************
+
+
     def putDataInPipe(self):
 
         time.sleep(0.2)
@@ -97,7 +113,7 @@ class Sender:
             self.recentPacket = packet
 
             ###############################################################################
-            self.sendDataWithNonPersistent(packet)
+            self.sendDataWithOnePersistent(packet)
             ###############################################################################
 
             self.seqNo = (self.seqNo+1)%2

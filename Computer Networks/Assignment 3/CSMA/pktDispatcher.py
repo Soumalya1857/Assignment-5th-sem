@@ -8,14 +8,14 @@ import helper
 from packet import *
 import const
 
-class pktDispatcher:
+class PktDispatcher:
     def __init__(self, name, channelToDispatcher, dispatcherToChannel, dispatcherToReceiver, receiverToDispatcher):
 
         self.name = name
-        self.channelToDispatcher = channelToDispatcher
-        self.dispatcherToChannel = dispatcherToChannel
-        self.dispatcherToReceiver = dispatcherToReceiver # needs to be a list of pipes writeheads
-        self.receiverToDispatcher = receiverToDispatcher
+        self.channelToDispatcher    = channelToDispatcher
+        self.dispatcherToChannel    = dispatcherToChannel
+        self.dispatcherToReceiver   = dispatcherToReceiver # needs to be a list of pipes writeheads
+        self.receiverToDispatcher   = receiverToDispatcher
     
     def dispatchPktToReceiver(self):
         while True:
