@@ -11,7 +11,7 @@ from packet import *
 
 
 class Sender:
-    def __init__(self, name, fileName, senderToChannel, channelToSender): #, channelEvent): # last two needs to be shared queue
+    def __init__(self, name, fileName, senderToChannel, channelToSender, idle, collision, collisionCount): #, channelEvent): # last two needs to be shared queue
         self.name               = name
         self.fileName           = fileName
         self.packetType         = {'data' : 0, 'ack' : 1}
@@ -22,6 +22,9 @@ class Sender:
         self.timeoutEvent       = threading.Event()
         self.endTransmitting    = False
         self.receivedAck        = False # true if ack received and verified as valid
+        self.idle               = idle # just a boolean value...initially true
+        self.collision          = collision # initially false
+        self.collisionCount     = collisionCount
         #self.recentPacket exists
 
     def selectReceiver(self):
@@ -39,9 +42,47 @@ class Sender:
     def resendCurrentPacket(self):
         self.senderToChannel.send(self.recentPacket)
 
+    def sendDataWithOnePersistent(self, packet):
+        """
+        ###############################################################################
+        # here goes all the logic
+        ####################### 1 persistent ##################             
+        # # doesn't involve slotted time concept
+        """
+        while True:
+
+            ranNumber = random.random() // const.randomNumber
+            time.sleep(ranNumber) # grab a time and sleep for that 0.0 <= time <= 0.1
+            # sense and grab the channel for sending
+            if self.idle == True:
+                # channel is idle it can send data with prob 1
+                # but as if collision = true means other thread already put data in pipe...collision
+                if self.collision == True:
+                    # collision occur...resend data
+                    self.collisionCount += 1
+                else:
+                    # collision doesn't happen grab the channel
+                    self.collision = True
+                    # wait for dataTransmission time tl + tp
+                    time.sleep(const.vulnarableTime)
+                    self.idle = False
+                    self.senderToChannel.send(packet) # send datapacket
+                    time.sleep(const.packetPropagationTime)
+                    # now set the channel to the prev state
+                    self.collision = False
+                    self.idle = False
+                    break
+            else:
+                    # retry again
+                continue
+
+            ###############################################################################
+
+
     def putDataInPipe(self):
 
         time.sleep(0.2)
+        startTime = time.time()
         print("***********************************")
         print("Sender{} starts sending data to Receiver{}".format(self.name+1, self.dest+1))
         print("***********************************")
@@ -54,7 +95,11 @@ class Sender:
         while byte:
             packet = Packet(self.packetType['data'], self.seqNo, byte, self.name, self.dest).makePacket()
             self.recentPacket = packet
-            self.senderToChannel.send(packet)
+
+            ###############################################################################
+            self.sendDataWithNonPersistent(packet)
+            ###############################################################################
+
             self.seqNo = (self.seqNo+1)%2
             pktCount += 1
             totalPktCount += 1
@@ -62,9 +107,12 @@ class Sender:
             while not self.receivedAck: # timeout does happen
                 #resend needed
                 self.timeoutEvent.wait(const.senderTimeout)# if timeout resend
-                time.sleep(0.2)
+                #time.sleep(0.2)
                 if not self.timeoutEvent.isSet(): 
-                    self.resendCurrentPacket()
+
+                    ###################################################################
+                    self.sendDataWithOnePersistent(self.recentPacket)
+                    ###################################################################
                     totalPktCount += 1
                     print("(Sender{}:) Packet {} has been resending!".format(self.name+1,pktCount))
                 else: break
@@ -74,10 +122,11 @@ class Sender:
         
         self.endTransmitting = True
         file.close()
+        endTime = time.time()
 
         print("\n*****************(Sender{}:)STATS******************".format(self.name+1))
         print("Total packets: {}\n Total Packets send {}".format(pktCount, totalPktCount))
-        print("Avg. time for sender: {} (in seconds)".format(str(random.randint(25,30)) + str(random.random())[:3]))
+        print("Avg. time for sender: {} (in seconds)".format(str(endTime-startTime)[:4]))
         print("******************************************************\n\n")
         
 
