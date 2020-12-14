@@ -19,15 +19,18 @@ class PktDispatcher:
     
     def dispatchPktToReceiver(self):
         while True:
-            print("Dispatcher is active...!")
             packet = self.channelToDispatcher.recv()
             receiver = packet.dest
-            self.dispatchPktToReceiver[receiver].send(packet)
+            sender = packet.sender
+            print("(Dispatcher:) sending packet to receiver{} from sender{}".format(receiver, sender))
+            self.dispatcherToReceiver[receiver].send(packet)
     
     def dispatchACKFromReceiverToChannel(self, receiver): # needs to run for every receiver
         while True:
+            print("(PktDispatcher:) Receiving...")
             ack = self.receiverToDispatcher[receiver].recv()
             self.dispatcherToChannel.send(ack)
+            print("(PktDispatcher:) ACK sent to channel!")
     
     def startDispatcher(self):
         receiver = 0

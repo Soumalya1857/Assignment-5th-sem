@@ -60,20 +60,21 @@ def start():
     senderList = []
     receiverList = []
 
-    idle = True
-    collision = False
-    collisionCount = 0
+    # idle = True
+    # collision = False
+    # collisionCount = 0
 
     for i in range(const.totalSenderNumber):
         sender = Sender(
             i, 
             'input'+str(i)+'.txt', 
             writeHeadOfSenderToChannelPipe,# needs to be changed with a queue
-            readHeadOfACKDispatcherToSenderPipe[i],
-            idle,
-            collision,
-            collisionCount
-            )
+            readHeadOfACKDispatcherToSenderPipe[i])
+            # ,
+            # idle,
+            # collision,
+            # collisionCount
+            # )
 
         senderList.append(sender)
 
