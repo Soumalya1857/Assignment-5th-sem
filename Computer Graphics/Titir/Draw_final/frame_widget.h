@@ -22,8 +22,8 @@ private:
     int maxwidth;
     int maxheight;
     bool visibleAxes;
-    bool lineDDA;
-    bool lineBresh;
+    bool line_DDA;
+    bool line_BA;
     QList <QPair<QPoint, QColor> > points;
     QPoint point1;
     QPoint point2;
@@ -52,12 +52,9 @@ public:
     QPoint setPoint2();
     void changeCurrentColour(QColor q);
     void drawLineDDA();
-    void drawLineBresh();
+    void drawLineBA();
 signals:
     void sendCoord(int x, int y);
-    void sendCoordForMousePress(int x, int y);
-    void sendTimeDDA(double);
-    void sendTimeBresh(double);
 };
 
 #endif // FRAME_WIDGET_H
