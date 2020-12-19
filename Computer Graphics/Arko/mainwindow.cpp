@@ -24,10 +24,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::createActions()
-{
+//void MainWindow::createActions()
+//{
 
-}
+//}
 
 void MainWindow::on_actionCreate_triggered()
 {
@@ -134,7 +134,12 @@ void MainWindow::on_pushButton_4_clicked()
 {
    emit drawLineBA();
 }
-
+void MainWindow::on_pushButton_6_clicked()
+{
+    int x = ui->comboBox->currentIndex();
+    int y = ui->radius->value();
+    emit drawCircle(x, y);
+}
 void MainWindow::on_pushButton_6_clicked()
 {
     int x = ui->comboBox->currentIndex();

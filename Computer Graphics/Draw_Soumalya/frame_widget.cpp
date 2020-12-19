@@ -303,6 +303,7 @@ void frame_widget::paintEvent(QPaintEvent *p)
             circlePolar = false;
             auto time2 = std::chrono::high_resolution_clock::now();
             double time = (time2 - time1).count();
+            emit sendCircleTime(time);
         }
         if(circleMP)
         {
@@ -357,6 +358,7 @@ void frame_widget::paintEvent(QPaintEvent *p)
             circleMP = false;
             auto time2 = std::chrono::high_resolution_clock::now();
             double time = (time2 - time1).count();
+            emit sendCircleTime(time);
         }
         if(circleBA)
         {
@@ -409,6 +411,7 @@ void frame_widget::paintEvent(QPaintEvent *p)
             circleBA = false;
             auto time2 = std::chrono::high_resolution_clock::now();
             double time = (time2-time1).count();
+            emit sendCircleTime(time);
         }
         if(ellipseBA)
         {
@@ -488,6 +491,7 @@ void frame_widget::paintEvent(QPaintEvent *p)
             ellipseBA = false;
             auto time2 = std::chrono::high_resolution_clock::now();
             double time = (time2 - time1).count();
+            emit sendEllipseTime(time);
         }
         if(modified)
         {
@@ -535,11 +539,11 @@ QPoint frame_widget::setPoint2()
 
 }
 
-void frame_widget::changeCurrentColour(QColor q)
-{
-    currentcol = q;
+//void frame_widget::changeCurrentColour(QColor q)
+//{
+//    currentcol = q;
 
-}
+//}
 
 void frame_widget::drawLineDDA()
 {
@@ -553,6 +557,41 @@ void frame_widget::drawLineBresh()
     lineBresh = true;
     update();
 }
+void frame_widget::drawCircle(int x, int y)
+{
+    radius = y;
+    if(x == 0) circleMP = true;
+    else if(x == 1) circleBA = true;
+    else circlePolar = true;
+    update();
+}
+void frame_widget::changeCurrentColour(int a, char c)
+{
+    QColor q(Rcolor, Gcolor, Bcolor);
+    if(c == 'R') {
+        q.setRed(a);
+        Rcolor = a;
+    }
+    else if(c == 'G') {
+        q.setGreen(a);
+        Gcolor = a;
+    }
+    else {
+        q.setBlue(a);
+        Bcolor = a;
+    }
+    currentcol = q;
+    emit sendColorLabel(Rcolor, Gcolor, Bcolor);
+}
+void frame_widget::drawEllipse(int r1, int r2)
+{
+    major = r1;
+    minor = r2;
+    ellipseBA = true;
+    update();
+}
+
+
 
 
 

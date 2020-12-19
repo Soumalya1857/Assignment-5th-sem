@@ -58,14 +58,22 @@ public:
     void mousePressEvent(QMouseEvent *ev) override;
     QPoint setPoint1();
     QPoint setPoint2();
-    void changeCurrentColour(QColor q);
+    //void changeCurrentColour(QColor q);
     void drawLineDDA();
     void drawLineBresh();
+    void drawCircle(int,int);
+    void drawEllipse(int ,int);
+    void changeCurrentColour(int a, char c);
+
+
 signals:
     void sendCoord(int x, int y);
     void sendCoordForMousePress(int x, int y);
     void sendTimeDDA(double);
     void sendTimeBresh(double);
+    void sendCircleTime(double);
+    void sendEllipseTime(double);
+    void sendColorLabel(int,int,int);
 };
 
 #endif // FRAME_WIDGET_H

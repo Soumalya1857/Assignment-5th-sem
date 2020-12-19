@@ -135,6 +135,7 @@ void frame_widget::paintEvent(QPaintEvent *p)
         }
     }
 
+
     if(visibleAxes){
         QBrush qBrush(Qt::gray);
         paint.setBrush(qBrush);
