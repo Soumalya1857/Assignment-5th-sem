@@ -3,19 +3,20 @@ import random
 import time
 import threading
 import sys
-sys.path.append('../package')
+#sys.path.append('../package')
 import const
 
 # thread.Lock
 # release and acquire
 
 class Sender:
-    def __init__(self, name, fileName, walshCode, senderToChannel, nextTimeSlot):
+    def __init__(self, name, fileName, walshCode, senderToChannel, nextTimeSlot, lock):
         self.name               = name
         self.fileName           = fileName
         self.senderToChannel    = senderToChannel # a pipe
         self.walshCode          = walshCode # tuple containg walshCode
         self.nextTimeSlot       = nextTimeSlot # threading object
+        self.lock               = lock
 
     
     def openFile(self, fileName):
@@ -40,15 +41,24 @@ class Sender:
                 dataToSend = []
                 dataBit = int(data[i])
                 if dataBit == 0: dataBit = -1
+               
 
                 for j in self.walshCode:
                     dataToSend.append(j * dataBit)
-
+                ##############################################
+                self.lock.acquire()
+                print("LOCK ACQUIRED!")
                 self.senderToChannel.send(dataToSend)
+                self.lock.release()
+                print("LOCK RELEASED!")
+                ##############################################
+                print("(Sender{}:) data bit send {}".format(self.name+1, dataBit))
+                print("Sender waiting for Channel nextTimeSlot")
                 self.nextTimeSlot.wait()
+                print("Wait over for sender!")
 
             byte = file.read(const.defaultDataPacketSize)
-            time.sleep(0.05)
+            #time.sleep(0.05)
         
         print("(Sender{}:) DONE SENDING...".format(self.name + 1))
 
@@ -56,7 +66,7 @@ class Sender:
             silent = 0
             self.senderToChannel.send(silent)
             self.nextTimeSlot.wait()
-            time.sleep(0.05)
+            #time.sleep(0.05)
     
 
     def startSender(self):

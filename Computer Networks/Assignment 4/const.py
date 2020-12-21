@@ -1,6 +1,6 @@
 
 
-totalSenderNumber       = 1
+totalSenderNumber       = 2
 totalReceiverNumber     = 1
 defaultDataPacketSize   = 1
 

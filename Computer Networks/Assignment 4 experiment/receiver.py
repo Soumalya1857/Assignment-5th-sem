@@ -24,8 +24,10 @@ class Receiver:
         return 0
     
     def getCharacter(self, data):
+        print("Data:" + str(data))
         string = ''.join(data)
         character = chr(int(string,2))
+        print("Char received: " + character)
         return character
     
     def openFile(self, sender):
@@ -38,11 +40,11 @@ class Receiver:
     
     def receiveData(self):
         print("(Receiver{}:) Receiver{} receives data from sender{}".format(self.name+1,self.name+1,self.senderToReceive+1))
-        totalData = [0 for i in range(len(self.walshTable[0]))]
+        totalData = []
         while True:
-            print("(Receiver:)data de!")
+            # print("(Receiver:)data de!")
             channelData = self.channelToReceiver.recv()
-            print("(Receiver:)Data mil gayii")
+            #print("(Receiver:)Data mil gayii")
             # extract data
             summation = 0
             for i in range(len(channelData)):
@@ -58,10 +60,10 @@ class Receiver:
             ##################################
             print("(Receiver{}:) Bit received: {}".format(self.name+1, bit))
 
-            if len(channelData) < 8 and bit != -1:
+            if len(totalData) < 8 and bit != -1:
                 # add the 
-                totalData.append(bit)
-            elif len(channelData) < 8 and bit == -1:
+                totalData.append(str(bit))
+            elif len(totalData) < 8 and bit == -1:
                 self.doNothing()
             else:
                 # totalData size is 8..we can construct a character now
@@ -71,10 +73,10 @@ class Receiver:
                 outFile = self.openFile(self.senderToReceive)
                 outFile.write(character)
                 outFile.close()
-                totalData = [0 for i in len(self.walshTable[0])]
+                totalData = []
                 
                 if bit != -1:
-                    totalData.append(bit)
+                    totalData.append(str(bit))
             #############################################
             # time.sleep(0.1)
             # self.waitTillReceived.set()
