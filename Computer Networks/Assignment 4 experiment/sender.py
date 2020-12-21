@@ -3,24 +3,16 @@ import random
 import time
 import threading
 import sys
-#sys.path.append('../package')
 import const
 
-# thread.Lock
-# release and acquire
 
 class Sender:
     def __init__(self, name, walshCode, senderToChannel):
         self.name                   = name
-        #self.fileName               = fileName
         self.senderToChannel        = senderToChannel # a pipe
         self.walshCode              = walshCode # need the matrix
         self.data                   = dict()
                
-        #self.nextTimeSlot       = nextTimeSlot # threading object
-        # self.lock1                  = lock1
-        # self.lock2                  = lock2
-        # self.feedBackFromChannel    = feedBackFromChannel
 
     
     def openFile(self, fileName):
@@ -32,62 +24,6 @@ class Sender:
         return file
     
     def sendData(self):
-        # startTime = time.time()
-        # file = self.openFile(self.fileName)
-
-        # totalBitSent = 0
-        # byte = file.read(const.defaultDataPacketSize)
-        # while byte:
-
-        #     # send the data bits of byte
-        #     data = '{0:08b}'.format(ord(byte))
-        #     for i in range(len(data)):
-        #         dataToSend = []
-        #         dataBit = int(data[i])
-        #         if dataBit == 0: dataBit = -1
-               
-
-        #         for j in self.walshCode:
-        #             dataToSend.append(j * dataBit)
-        #         ##############################################
-        #         self.lock1.acquire()
-        #         print("(Sender:)LOCK ACQUIRED!")
-        #         self.senderToChannel.send(dataToSend)
-        #         self.lock1.release()
-        #         print("(Sender:)LOCK RELEASED!")
-        #         ##############################################
-        #         print("(Sender{}:) data bit send {}".format(self.name+1, dataBit))
-        #         print("Sender waiting for Channel nextTimeSlot")
-        #         #################################################
-        #         self.lock2.acquire()
-        #         time.sleep(0.5)
-        #         print("(Sender Recv)" + str(time.time()))
-        #         self.feedBackFromChannel.recv()
-        #         self.lock2.release()
-        #         print("(Sender:)Wait over for sender!")
-        #         ################################################
-
-        #     byte = file.read(const.defaultDataPacketSize)
-        #     #time.sleep(0.05)
-        
-        # print("(Sender{}:) DONE SENDING...".format(self.name + 1))
-
-        # while(True):
-        #     silent = 0
-        #     self.lock.acquire()
-        #     print("(Sender:)LOCK ACQUIRED!")
-        #     self.senderToChannel.send(silent)
-        #     self.lock.release()
-        #     print("(Sender:)LOCK RELEASED!")
-
-        #     self.lock.acquire()
-        #     garbage = self.feedBackFromChannel.recv()
-        #     self.lock.release()
-        #     print("(Sender:)Wait over for silent sender!")
-           
-        #     #nextTimeSlot.wait()
-        #     #time.sleep(0.05)
-
         self.preProcessing()
         print("(Sender:)Preprocessing done!!!")
         length = len(self.data[1])
@@ -101,9 +37,6 @@ class Sender:
                     dataToSend[k] += tempData[k]
             
             self.senderToChannel.send(dataToSend)
-
-
-   
 
 
 

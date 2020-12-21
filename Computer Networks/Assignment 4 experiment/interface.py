@@ -96,8 +96,7 @@ def start(wTable):
     channelObj = Channel(
         0, 
         readHeadOfSenderToChannelPipe, # single pipe 
-        writeHeadOfChannelToReceiverPipeList,
-        waitTillReceived
+        writeHeadOfChannelToReceiverPipeList
     )
 
     

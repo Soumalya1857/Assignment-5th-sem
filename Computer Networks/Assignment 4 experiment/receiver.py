@@ -42,9 +42,7 @@ class Receiver:
         print("(Receiver{}:) Receiver{} receives data from sender{}".format(self.name+1,self.name+1,self.senderToReceive+1))
         totalData = []
         while True:
-            # print("(Receiver:)data de!")
             channelData = self.channelToReceiver.recv()
-            #print("(Receiver:)Data mil gayii")
             # extract data
             summation = 0
             for i in range(len(channelData)):
@@ -61,7 +59,7 @@ class Receiver:
             print("(Receiver{}:) Bit received: {}".format(self.name+1, bit))
 
             if len(totalData) < 8 and bit != -1:
-                # add the 
+                # add the bit to totalData 
                 totalData.append(str(bit))
             elif len(totalData) < 8 and bit == -1:
                 self.doNothing()
@@ -77,10 +75,6 @@ class Receiver:
                 
                 if bit != -1:
                     totalData.append(str(bit))
-            #############################################
-            # time.sleep(0.1)
-            # self.waitTillReceived.set()
-            # print("Receiver Set received flag!")
 
     def startReceiver(self):
         t = threading.Thread(name='Receiver', target=self.receiveData)
