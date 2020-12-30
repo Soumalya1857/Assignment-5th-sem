@@ -90,6 +90,16 @@ public:
 
     void on_pushButton_7_clicked();
 
+    void on_pushButton_9_clicked();
+
+    void on_pushButton_8_clicked();
+
+    void on_pushButton_11_clicked();
+
+    void on_pushButton_10_clicked();
+
+    void on_spinBox_5_valueChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
     //frame_widget *gridFrame;
@@ -102,6 +112,9 @@ public slots:
     void showColorLabel(int,int,int);
     void showCircleTime(double);
     void showEllipseTime(double);
+    void showVertices(int,int,int);
+    void showSeed(int,int);
+    void showFillTime(double);
 
 
 signals:

@@ -39,7 +39,7 @@ QPoint frame_widget::convertCoord(int x, int y)
 frame_widget::frame_widget(QWidget *parent):
     QFrame(parent)
 {
-    size = 100;
+    //size = 100;
     grid = false;
     modified = false;
     size = 25;
@@ -57,6 +57,10 @@ frame_widget::frame_widget(QWidget *parent):
     Rcolor = 255;
     Gcolor = 0;
     Bcolor = 0;
+    polygonVertices = 3;
+    polygonStart = false;
+    seed = false;
+    createGrid();
 }
 
 
@@ -66,6 +70,13 @@ void frame_widget::createGrid()
 {
     //grid = true;
     points.clear();
+    destroyPolygon(polygonVertices);
+    img = QImage(maxwidth, maxheight, QImage::Format_RGB32);
+
+    for(int i=0; i<maxwidth; i++) {
+        for(int j=0;j<maxheight; j++)
+            img.setPixel(i, j, qRgb(0, 0, 0));
+    }
     update();
 }
 
@@ -152,6 +163,8 @@ void frame_widget::paintEvent(QPaintEvent *p)
     QPainter paint(this);
     //paint.setPen(Qt::white);
     //pix.fill(Qt::white);
+    QBrush qBrush(Qt::white);
+    paint.setBrush(qBrush);
     paint.drawRect(0, 0, min(maxheight, 500), min(maxwidth, 500));
 
     if(grid)
@@ -523,6 +536,40 @@ void frame_widget::mousePressEvent(QMouseEvent *event)
    emit sendCoordForMousePress(p.x(),p.y());
    //return convertPixel(lastpoint);
 
+   if(polygonStart) {
+
+       if(clickedPoints.size() != polygonVertices)
+           clickedPoints.append(convertPixel(lastpoint));
+
+       if(clickedPoints.size() == polygonVertices) {
+           QPoint last = convertPixel(lastpoint);
+           //emit displayPolygonEnd(last.x(), last.y());
+           std::cout << "End vertice: " <<"X: " << last.x() << " Y: " << last.y();
+           polygonStart = false;
+       }
+
+       if(clickedPoints.size() == 1) {
+           QPoint last = convertPixel(lastpoint);
+           std::cout << "Start vertice: " <<"X: " << last.x() << " Y: " << last.y();
+           //emit displayPolygonStart(last.x(), last.y());
+       }
+       QPoint last = convertPixel(lastpoint);
+       emit showPoint(last.x(), last.y(), clickedPoints.size());
+   }
+
+   points.append({lastpoint, currentcol});QPoint last = convertPixel(lastpoint);
+   emit sendCoord(last.x(), last.y());
+
+   if(seed) {
+       points.append({lastpoint, currentcol});
+       seed = false;
+       QPoint last = convertPixel(lastpoint);
+       emit sendSeed(last.x(), last.y());
+       seedpoint = convertCoord(last.x(), last.y());
+   }
+   repaint();
+
+
 }
 
 QPoint frame_widget::setPoint1()
@@ -550,6 +597,34 @@ void frame_widget::drawLineDDA()
     lineDDA = true;
     update();
 
+}
+
+void frame_widget::drawLineDDA(QPoint temp1, QPoint temp2)
+{
+    double x = temp1.x();
+    double y = temp1.y();
+    double dx = (temp2.x() - temp1.x());
+    double dy = (temp2.y() - temp1.y());
+    double steps;
+    if(abs(dx) > abs(dy)){
+        steps = abs(dx);
+    }
+    else{
+        steps = abs(dy);
+    }
+    double inc_x = dx/(float)steps;
+    double inc_y = dy/(float)steps;
+    for(int i = 0 ; i < steps ; i++){
+
+        x = x + (inc_x);
+        y = y + (inc_y);
+        QPoint p0 = convertCoord(round(x), round(y));
+        if(QPoint(round(x), round(y)) == point2){
+            continue;
+        }
+        points.append({p0, currentcol});
+    }
+    modified = true;
 }
 
 void frame_widget::drawLineBresh()
@@ -592,7 +667,189 @@ void frame_widget::drawEllipse(int r1, int r2)
 }
 
 
+void frame_widget::createPolygon(int x)
+{
+    while(clickedPoints.size() != 0)
+        clickedPoints.pop_front();
+    polygonVertices = x;
+    polygonStart = true;
+    emit startPolygon();
+}
+
+void frame_widget::destroyPolygon(int x)
+{
+    while(clickedPoints.size() != 0)
+        clickedPoints.pop_front();
+    polygonStart = false;
+    polygonVertices = x;
+    emit endPolygon();
+}
+
+void frame_widget::drawPolygon()
+{
+    QElapsedTimer timer;
+    timer.start();
+
+    for(int i=0; i<clickedPoints.size(); i++) {
+        QPoint tempPoint1 = clickedPoints[i];
+        QPoint tempPoint2 = clickedPoints[(i+1)%clickedPoints.size()];
+        drawLineDDA(tempPoint1, tempPoint2);
+    }
+
+    int time = timer.nsecsElapsed();
+    emit sendTime(time/1000);
+    update();
+}
+
+void frame_widget::setSeed()
+{
+    seed = true;
+}
+
+void frame_widget::boundary_fill()
+{
+    QRgb edgeColor = qRgb(currentcol.red(), currentcol.green(), currentcol.blue());
+    QRgb fillColor = qRgb(225, 218, 255);
+    QTextStream out(stdout);
+
+    QElapsedTimer timer;
+    timer.start();
+
+    QList<QPoint> q;
+    int index = 0;
+    q.append(seedpoint);
+    int x = seedpoint.x();
+    int y = seedpoint.y();
+
+    for(int i=x; i<x+size; i++) {
+        for(int j=y; j<y+size; j++) {
+            img.setPixel(i, j, fillColor);
+        }
+    }
+
+    while(q.size() != index) {
+        QPoint curr = q[index];
+        x = curr.x();
+        y = curr.y();
+
+        if(img.pixel(x + size, y) != edgeColor && img.pixel(x + size, y) != fillColor) {
+            q.append(QPoint(x + size, y));
+            for(int i=x+size; i<x+2*size; i++) {
+                for(int j=y; j<y+size; j++) {
+                    img.setPixel(i, j, fillColor);
+                }
+            }
+        }
+        if(img.pixel(x - size, y) != edgeColor && img.pixel(x - size, y) != fillColor) {
+            q.append(QPoint(x - size, y));
+            for(int i=x-size; i<x; i++) {
+                for(int j=y; j<y+size; j++) {
+                    img.setPixel(i, j, fillColor);
+                }
+            }
+        }
+        if(img.pixel(x, y + size) != edgeColor && img.pixel(x, y + size) != fillColor) {
+            q.append(QPoint(x, y + size));
+            for(int i=x; i<x+size; i++) {
+                for(int j=y+size; j<y+2*size; j++) {
+                    img.setPixel(i, j, fillColor);
+                }
+            }
+        }
+        if(img.pixel(x, y - size) != edgeColor && img.pixel(x, y - size) != fillColor) {
+            q.append(QPoint(x, y - size));
+            for(int i=x; i<x+size; i++) {
+                for(int j=y-size; j<y; j++) {
+                    img.setPixel(i, j, fillColor);
+                }
+            }
+        }
+        index++;
+    }
+
+    for(int i=0; i<q.size(); i++) {
+        points.append({q[i], fillColor});
+    }
+
+    int time = timer.nsecsElapsed();
+    emit sendTime(time/1000);
+    update();
+}
 
 
+void frame_widget::flood_fill()
+{
+    QRgb prevColor = qRgb(0,0,0);
+    QRgb fillColor = qRgb(currentcol.red(), currentcol.green(), currentcol.blue());
+    QTextStream out(stdout);
 
+    QElapsedTimer timer;
+    timer.start();
+
+    QList<QPoint> q;
+    int index = 0;
+    q.append(seedpoint);
+    int x = seedpoint.x();
+    int y = seedpoint.y();
+
+    for(int i=x; i<x+size; i++) {
+        for(int j=y; j<y+size; j++) {
+            img.setPixel(i, j, fillColor);
+        }
+    }
+
+    while(q.size() != index) {
+        QPoint curr = q[index];
+        x = curr.x();
+        y = curr.y();
+
+        if(img.pixel(x + size, y) == prevColor && img.pixel(x + size, y) != fillColor) {
+            q.append(QPoint(x + size, y));
+            for(int i=x+size; i<x+2*size; i++) {
+                for(int j=y; j<y+size; j++) {
+                    img.setPixel(i, j, fillColor);
+                }
+            }
+        }
+        if(img.pixel(x - size, y) == prevColor && img.pixel(x - size, y) != fillColor) {
+            q.append(QPoint(x - size, y));
+            for(int i=x-size; i<x; i++) {
+                for(int j=y; j<y+size; j++) {
+                    img.setPixel(i, j, fillColor);
+                }
+            }
+        }
+        if(img.pixel(x, y + size) == prevColor && img.pixel(x, y + size) != fillColor) {
+            q.append(QPoint(x, y + size));
+            for(int i=x; i<x+size; i++) {
+                for(int j=y+size; j<y+2*size; j++) {
+                    img.setPixel(i, j, fillColor);
+                }
+            }
+        }
+        if(img.pixel(x, y - size) == prevColor && img.pixel(x, y - size) != fillColor) {
+            q.append(QPoint(x, y - size));
+            for(int i=x; i<x+size; i++) {
+                for(int j=y-size; j<y; j++) {
+                    img.setPixel(i, j, fillColor);
+                }
+            }
+        }
+        index++;
+    }
+
+    for(int i=0; i<q.size(); i++) {
+        points.append({q[i], fillColor});
+    }
+
+    int time = timer.nsecsElapsed();
+    emit sendTime(time/1000);
+    update();
+}
+
+
+void frame_widget::scanLine_fill()
+{
+    std::cout << "mama\n";
+}
 

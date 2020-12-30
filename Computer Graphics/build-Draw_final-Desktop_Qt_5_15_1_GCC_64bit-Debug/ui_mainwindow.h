@@ -13,10 +13,13 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
+#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSlider>
@@ -31,133 +34,572 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
-    QAction *actionCreate_New;
     QWidget *centralwidget;
     frame_widget *frame;
-    QWidget *layoutWidget;
-    QVBoxLayout *verticalLayout_2;
+    QPushButton *pushButton_5;
+    QLabel *label_20;
+    QWidget *verticalLayoutWidget;
+    QVBoxLayout *verticalLayout_3;
+    QHBoxLayout *horizontalLayout_14;
+    QLabel *label_21;
+    QDoubleSpinBox *scalex;
+    QHBoxLayout *horizontalLayout_15;
+    QLabel *label_22;
+    QDoubleSpinBox *scaley;
+    QPushButton *pushButton_scale;
+    QWidget *verticalLayoutWidget_2;
+    QVBoxLayout *verticalLayout_4;
+    QHBoxLayout *horizontalLayout_12;
+    QLabel *label_15;
+    QSpinBox *tranx;
+    QHBoxLayout *horizontalLayout_13;
+    QLabel *label_19;
+    QSpinBox *trany;
+    QPushButton *pushButton_translate;
+    QWidget *verticalLayoutWidget_3;
+    QVBoxLayout *verticalLayout_5;
+    QHBoxLayout *horizontalLayout_16;
+    QLabel *label_23;
+    QSpinBox *rotate;
+    QPushButton *pushButton_rotate;
+    QPushButton *pushButton_reflect;
+    QWidget *verticalLayoutWidget_5;
+    QVBoxLayout *verticalLayout_7;
+    QLabel *label_28;
+    QHBoxLayout *horizontalLayout_18;
+    QPushButton *pushButton_11;
+    QLabel *point1;
+    QHBoxLayout *horizontalLayout_19;
+    QPushButton *pushButton_10;
+    QLabel *point2;
+    QComboBox *comboBox_4;
+    QPushButton *pushButton_line;
+    QWidget *verticalLayoutWidget_6;
+    QVBoxLayout *verticalLayout_8;
+    QHBoxLayout *horizontalLayout_5;
+    QLabel *label_14;
+    QSpinBox *vertices;
+    QPushButton *pushButton_8;
+    QPushButton *pushButton_9;
+    QHBoxLayout *horizontalLayout_11;
+    QPushButton *pushButton_3;
+    QLabel *seed;
+    QHBoxLayout *horizontalLayout_9;
+    QLabel *polygonStart;
+    QLabel *polygonEnd;
+    QComboBox *comboBox_3;
+    QPushButton *pushButton_4;
+    QLabel *label_24;
+    QWidget *verticalLayoutWidget_7;
+    QVBoxLayout *verticalLayout_9;
+    QHBoxLayout *horizontalLayout_20;
+    QLabel *label_3;
+    QSlider *rSlider;
+    QHBoxLayout *horizontalLayout_22;
+    QLabel *label_8;
+    QSlider *bSlider;
+    QHBoxLayout *horizontalLayout_21;
+    QLabel *label_7;
+    QSlider *gSlider;
+    QHBoxLayout *horizontalLayout_17;
+    QLabel *R;
+    QLabel *color;
+    QWidget *verticalLayoutWidget_9;
+    QVBoxLayout *verticalLayout_11;
     QHBoxLayout *horizontalLayout_2;
-    QLabel *button;
+    QLabel *label_6;
+    QLabel *coord;
+    QHBoxLayout *horizontalLayout_6;
+    QLabel *label_5;
+    QLabel *press;
+    QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout;
     QRadioButton *radioButton;
     QRadioButton *radioButton_2;
-    QWidget *layoutWidget1;
-    QVBoxLayout *verticalLayout_5;
-    QVBoxLayout *verticalLayout_3;
-    QHBoxLayout *horizontalLayout_4;
-    QLabel *label_1;
-    QLabel *label_2;
-    QHBoxLayout *horizontalLayout_5;
-    QPushButton *pushButton_2;
-    QPushButton *pushButton;
-    QPushButton *pushButton_4;
-    QPushButton *pushButton_5;
-    QPushButton *pushButton_3;
-    QWidget *layoutWidget2;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label;
     QSpinBox *spinBox;
-    QLabel *coord;
-    QWidget *horizontalLayoutWidget;
-    QHBoxLayout *horizontalLayout;
-    QLabel *label_3;
-    QWidget *horizontalLayoutWidget_2;
-    QHBoxLayout *horizontalLayout_6;
-    QLabel *label_4;
-    QLabel *label_5;
-    QLabel *label_6;
-    QFrame *line;
-    QWidget *verticalLayoutWidget;
-    QVBoxLayout *verticalLayout_4;
-    QHBoxLayout *horizontalLayout_7;
-    QLabel *label_7;
-    QSpinBox *spinBox_2;
+    QLabel *label_26;
+    QWidget *verticalLayoutWidget_4;
+    QVBoxLayout *verticalLayout_6;
+    QLabel *label_25;
     QComboBox *comboBox;
     QHBoxLayout *horizontalLayout_8;
-    QLabel *label_8;
-    QLabel *label_9;
-    QLabel *label_10;
-    QWidget *horizontalLayoutWidget_5;
-    QHBoxLayout *horizontalLayout_9;
-    QLabel *label_11;
-    QSlider *rSlider;
-    QWidget *horizontalLayoutWidget_6;
-    QHBoxLayout *horizontalLayout_10;
-    QLabel *label_12;
-    QSlider *bSlider;
-    QWidget *horizontalLayoutWidget_7;
-    QHBoxLayout *horizontalLayout_11;
-    QLabel *label_13;
-    QSlider *gSlider;
-    QLabel *label_14;
+    QLabel *label_4;
+    QSpinBox *radius;
+    QHBoxLayout *horizontalLayout_4;
+    QPushButton *pushButton_2;
+    QLabel *center;
     QPushButton *pushButton_6;
-    QWidget *horizontalLayoutWidget_8;
-    QHBoxLayout *horizontalLayout_12;
-    QLabel *label_15;
-    QLabel *label_16;
-    QLabel *label_17;
-    QLabel *showColor;
+    QFrame *line;
     QFrame *line_2;
-    QLabel *label_18;
-    QWidget *horizontalLayoutWidget_10;
-    QHBoxLayout *horizontalLayout_14;
-    QLabel *label_21;
-    QSpinBox *spinBox_3;
-    QWidget *horizontalLayoutWidget_11;
-    QHBoxLayout *horizontalLayout_15;
-    QLabel *label_22;
-    QSpinBox *spinBox_4;
-    QWidget *horizontalLayoutWidget_12;
-    QHBoxLayout *horizontalLayout_16;
-    QLabel *label_23;
-    QLabel *label_24;
+    QWidget *verticalLayoutWidget_8;
+    QVBoxLayout *verticalLayout_10;
+    QHBoxLayout *horizontalLayout_10;
+    QPushButton *pushButton;
+    QLabel *center_2;
+    QHBoxLayout *horizontalLayout;
+    QLabel *label_9;
+    QSpinBox *major;
+    QHBoxLayout *horizontalLayout_7;
+    QLabel *label_10;
+    QSpinBox *minor;
     QComboBox *comboBox_2;
-    QWidget *horizontalLayoutWidget_9;
-    QHBoxLayout *horizontalLayout_13;
-    QLabel *label_19;
-    QLabel *label_20;
     QPushButton *pushButton_7;
+    QLabel *label_27;
+    QFrame *line_3;
+    QFrame *line_4;
+    QWidget *horizontalLayoutWidget_21;
+    QHBoxLayout *horizontalLayout_23;
+    QLabel *R_2;
+    QLabel *polygonTime;
+    QWidget *horizontalLayoutWidget_22;
+    QHBoxLayout *horizontalLayout_24;
+    QLabel *R_3;
+    QLabel *ellipseTime;
+    QWidget *horizontalLayoutWidget_23;
+    QHBoxLayout *horizontalLayout_25;
+    QLabel *R_4;
+    QLabel *transformationTime;
+    QMenuBar *menubar;
+    QMenu *menuCreate_New;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1212, 678);
-        actionCreate_New = new QAction(MainWindow);
-        actionCreate_New->setObjectName(QString::fromUtf8("actionCreate_New"));
+        MainWindow->resize(1210, 664);
+        MainWindow->setStyleSheet(QString::fromUtf8("background-color: rgb(238, 189, 241);"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         frame = new frame_widget(centralwidget);
         frame->setObjectName(QString::fromUtf8("frame"));
-        frame->setGeometry(QRect(39, 29, 501, 501));
+        frame->setGeometry(QRect(16, 26, 530, 530));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Raised);
-        layoutWidget = new QWidget(centralwidget);
-        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(570, 260, 191, 115));
-        verticalLayout_2 = new QVBoxLayout(layoutWidget);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+        pushButton_5 = new QPushButton(centralwidget);
+        pushButton_5->setObjectName(QString::fromUtf8("pushButton_5"));
+        pushButton_5->setGeometry(QRect(180, 580, 171, 31));
+        label_20 = new QLabel(centralwidget);
+        label_20->setObjectName(QString::fromUtf8("label_20"));
+        label_20->setGeometry(QRect(1035, 3, 111, 21));
+        label_20->setStyleSheet(QString::fromUtf8("font: 75 italic 11pt \"Ubuntu Condensed\";\n"
+"font-size: 14px;\n"
+"color: rgb(0, 0, 0);"));
+        label_20->setAlignment(Qt::AlignCenter);
+        verticalLayoutWidget = new QWidget(centralwidget);
+        verticalLayoutWidget->setObjectName(QString::fromUtf8("verticalLayoutWidget"));
+        verticalLayoutWidget->setGeometry(QRect(1020, 160, 160, 93));
+        verticalLayout_3 = new QVBoxLayout(verticalLayoutWidget);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_3->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_14 = new QHBoxLayout();
+        horizontalLayout_14->setObjectName(QString::fromUtf8("horizontalLayout_14"));
+        label_21 = new QLabel(verticalLayoutWidget);
+        label_21->setObjectName(QString::fromUtf8("label_21"));
+        label_21->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_14->addWidget(label_21);
+
+        scalex = new QDoubleSpinBox(verticalLayoutWidget);
+        scalex->setObjectName(QString::fromUtf8("scalex"));
+        scalex->setDecimals(1);
+        scalex->setMaximum(10.000000000000000);
+        scalex->setSingleStep(0.300000000000000);
+        scalex->setValue(1.000000000000000);
+
+        horizontalLayout_14->addWidget(scalex);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_14);
+
+        horizontalLayout_15 = new QHBoxLayout();
+        horizontalLayout_15->setObjectName(QString::fromUtf8("horizontalLayout_15"));
+        label_22 = new QLabel(verticalLayoutWidget);
+        label_22->setObjectName(QString::fromUtf8("label_22"));
+        label_22->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_15->addWidget(label_22);
+
+        scaley = new QDoubleSpinBox(verticalLayoutWidget);
+        scaley->setObjectName(QString::fromUtf8("scaley"));
+        scaley->setDecimals(1);
+        scaley->setMaximum(10.000000000000000);
+        scaley->setSingleStep(0.300000000000000);
+        scaley->setValue(1.000000000000000);
+
+        horizontalLayout_15->addWidget(scaley);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_15);
+
+        pushButton_scale = new QPushButton(verticalLayoutWidget);
+        pushButton_scale->setObjectName(QString::fromUtf8("pushButton_scale"));
+
+        verticalLayout_3->addWidget(pushButton_scale);
+
+        verticalLayoutWidget_2 = new QWidget(centralwidget);
+        verticalLayoutWidget_2->setObjectName(QString::fromUtf8("verticalLayoutWidget_2"));
+        verticalLayoutWidget_2->setGeometry(QRect(1020, 40, 160, 101));
+        verticalLayout_4 = new QVBoxLayout(verticalLayoutWidget_2);
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        verticalLayout_4->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_12 = new QHBoxLayout();
+        horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
+        label_15 = new QLabel(verticalLayoutWidget_2);
+        label_15->setObjectName(QString::fromUtf8("label_15"));
+        label_15->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_12->addWidget(label_15);
+
+        tranx = new QSpinBox(verticalLayoutWidget_2);
+        tranx->setObjectName(QString::fromUtf8("tranx"));
+        tranx->setMinimum(-50);
+        tranx->setMaximum(50);
+
+        horizontalLayout_12->addWidget(tranx);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_12);
+
+        horizontalLayout_13 = new QHBoxLayout();
+        horizontalLayout_13->setObjectName(QString::fromUtf8("horizontalLayout_13"));
+        label_19 = new QLabel(verticalLayoutWidget_2);
+        label_19->setObjectName(QString::fromUtf8("label_19"));
+        label_19->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_13->addWidget(label_19);
+
+        trany = new QSpinBox(verticalLayoutWidget_2);
+        trany->setObjectName(QString::fromUtf8("trany"));
+        trany->setMinimum(-50);
+        trany->setMaximum(50);
+
+        horizontalLayout_13->addWidget(trany);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_13);
+
+        pushButton_translate = new QPushButton(verticalLayoutWidget_2);
+        pushButton_translate->setObjectName(QString::fromUtf8("pushButton_translate"));
+
+        verticalLayout_4->addWidget(pushButton_translate);
+
+        verticalLayoutWidget_3 = new QWidget(centralwidget);
+        verticalLayoutWidget_3->setObjectName(QString::fromUtf8("verticalLayoutWidget_3"));
+        verticalLayoutWidget_3->setGeometry(QRect(1020, 280, 167, 91));
+        verticalLayout_5 = new QVBoxLayout(verticalLayoutWidget_3);
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        verticalLayout_5->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_16 = new QHBoxLayout();
+        horizontalLayout_16->setObjectName(QString::fromUtf8("horizontalLayout_16"));
+        label_23 = new QLabel(verticalLayoutWidget_3);
+        label_23->setObjectName(QString::fromUtf8("label_23"));
+        label_23->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_16->addWidget(label_23);
+
+        rotate = new QSpinBox(verticalLayoutWidget_3);
+        rotate->setObjectName(QString::fromUtf8("rotate"));
+        rotate->setMinimum(-180);
+        rotate->setMaximum(180);
+        rotate->setSingleStep(5);
+
+        horizontalLayout_16->addWidget(rotate);
+
+
+        verticalLayout_5->addLayout(horizontalLayout_16);
+
+        pushButton_rotate = new QPushButton(verticalLayoutWidget_3);
+        pushButton_rotate->setObjectName(QString::fromUtf8("pushButton_rotate"));
+
+        verticalLayout_5->addWidget(pushButton_rotate);
+
+        pushButton_reflect = new QPushButton(verticalLayoutWidget_3);
+        pushButton_reflect->setObjectName(QString::fromUtf8("pushButton_reflect"));
+
+        verticalLayout_5->addWidget(pushButton_reflect);
+
+        verticalLayoutWidget_5 = new QWidget(centralwidget);
+        verticalLayoutWidget_5->setObjectName(QString::fromUtf8("verticalLayoutWidget_5"));
+        verticalLayoutWidget_5->setGeometry(QRect(580, 170, 160, 165));
+        verticalLayout_7 = new QVBoxLayout(verticalLayoutWidget_5);
+        verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
+        verticalLayout_7->setContentsMargins(0, 0, 0, 0);
+        label_28 = new QLabel(verticalLayoutWidget_5);
+        label_28->setObjectName(QString::fromUtf8("label_28"));
+        label_28->setStyleSheet(QString::fromUtf8("font: 75 italic 11pt \"Ubuntu Condensed\";\n"
+"font-size: 14px;\n"
+"color: rgb(0, 0, 0);"));
+        label_28->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_7->addWidget(label_28);
+
+        horizontalLayout_18 = new QHBoxLayout();
+        horizontalLayout_18->setObjectName(QString::fromUtf8("horizontalLayout_18"));
+        pushButton_11 = new QPushButton(verticalLayoutWidget_5);
+        pushButton_11->setObjectName(QString::fromUtf8("pushButton_11"));
+
+        horizontalLayout_18->addWidget(pushButton_11);
+
+        point1 = new QLabel(verticalLayoutWidget_5);
+        point1->setObjectName(QString::fromUtf8("point1"));
+        point1->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_18->addWidget(point1);
+
+
+        verticalLayout_7->addLayout(horizontalLayout_18);
+
+        horizontalLayout_19 = new QHBoxLayout();
+        horizontalLayout_19->setObjectName(QString::fromUtf8("horizontalLayout_19"));
+        pushButton_10 = new QPushButton(verticalLayoutWidget_5);
+        pushButton_10->setObjectName(QString::fromUtf8("pushButton_10"));
+
+        horizontalLayout_19->addWidget(pushButton_10);
+
+        point2 = new QLabel(verticalLayoutWidget_5);
+        point2->setObjectName(QString::fromUtf8("point2"));
+        point2->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_19->addWidget(point2);
+
+
+        verticalLayout_7->addLayout(horizontalLayout_19);
+
+        comboBox_4 = new QComboBox(verticalLayoutWidget_5);
+        comboBox_4->addItem(QString());
+        comboBox_4->addItem(QString());
+        comboBox_4->addItem(QString());
+        comboBox_4->setObjectName(QString::fromUtf8("comboBox_4"));
+        comboBox_4->setStyleSheet(QString::fromUtf8("border: 0.5px solid rgb(100, 100, 100)\n"
+""));
+
+        verticalLayout_7->addWidget(comboBox_4);
+
+        pushButton_line = new QPushButton(verticalLayoutWidget_5);
+        pushButton_line->setObjectName(QString::fromUtf8("pushButton_line"));
+
+        verticalLayout_7->addWidget(pushButton_line);
+
+        verticalLayoutWidget_6 = new QWidget(centralwidget);
+        verticalLayoutWidget_6->setObjectName(QString::fromUtf8("verticalLayoutWidget_6"));
+        verticalLayoutWidget_6->setGeometry(QRect(790, 320, 191, 230));
+        verticalLayout_8 = new QVBoxLayout(verticalLayoutWidget_6);
+        verticalLayout_8->setObjectName(QString::fromUtf8("verticalLayout_8"));
+        verticalLayout_8->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        label_14 = new QLabel(verticalLayoutWidget_6);
+        label_14->setObjectName(QString::fromUtf8("label_14"));
+        label_14->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_5->addWidget(label_14);
+
+        vertices = new QSpinBox(verticalLayoutWidget_6);
+        vertices->setObjectName(QString::fromUtf8("vertices"));
+        vertices->setMinimum(3);
+        vertices->setMaximum(20);
+        vertices->setValue(3);
+
+        horizontalLayout_5->addWidget(vertices);
+
+
+        verticalLayout_8->addLayout(horizontalLayout_5);
+
+        pushButton_8 = new QPushButton(verticalLayoutWidget_6);
+        pushButton_8->setObjectName(QString::fromUtf8("pushButton_8"));
+
+        verticalLayout_8->addWidget(pushButton_8);
+
+        pushButton_9 = new QPushButton(verticalLayoutWidget_6);
+        pushButton_9->setObjectName(QString::fromUtf8("pushButton_9"));
+
+        verticalLayout_8->addWidget(pushButton_9);
+
+        horizontalLayout_11 = new QHBoxLayout();
+        horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
+        pushButton_3 = new QPushButton(verticalLayoutWidget_6);
+        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
+
+        horizontalLayout_11->addWidget(pushButton_3);
+
+        seed = new QLabel(verticalLayoutWidget_6);
+        seed->setObjectName(QString::fromUtf8("seed"));
+        seed->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_11->addWidget(seed);
+
+
+        verticalLayout_8->addLayout(horizontalLayout_11);
+
+        horizontalLayout_9 = new QHBoxLayout();
+        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
+        polygonStart = new QLabel(verticalLayoutWidget_6);
+        polygonStart->setObjectName(QString::fromUtf8("polygonStart"));
+        polygonStart->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_9->addWidget(polygonStart);
+
+        polygonEnd = new QLabel(verticalLayoutWidget_6);
+        polygonEnd->setObjectName(QString::fromUtf8("polygonEnd"));
+        polygonEnd->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_9->addWidget(polygonEnd);
+
+
+        verticalLayout_8->addLayout(horizontalLayout_9);
+
+        comboBox_3 = new QComboBox(verticalLayoutWidget_6);
+        comboBox_3->addItem(QString());
+        comboBox_3->addItem(QString());
+        comboBox_3->addItem(QString());
+        comboBox_3->setObjectName(QString::fromUtf8("comboBox_3"));
+        comboBox_3->setStyleSheet(QString::fromUtf8("border: 0.5px solid rgb(100, 100, 100)\n"
+""));
+
+        verticalLayout_8->addWidget(comboBox_3);
+
+        pushButton_4 = new QPushButton(verticalLayoutWidget_6);
+        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
+
+        verticalLayout_8->addWidget(pushButton_4);
+
+        label_24 = new QLabel(centralwidget);
+        label_24->setObjectName(QString::fromUtf8("label_24"));
+        label_24->setGeometry(QRect(810, 280, 158, 21));
+        label_24->setStyleSheet(QString::fromUtf8("font: 75 italic 11pt \"Ubuntu Condensed\";\n"
+"font-size: 14px;\n"
+"color: rgb(0, 0, 0);"));
+        label_24->setAlignment(Qt::AlignCenter);
+        verticalLayoutWidget_7 = new QWidget(centralwidget);
+        verticalLayoutWidget_7->setObjectName(QString::fromUtf8("verticalLayoutWidget_7"));
+        verticalLayoutWidget_7->setGeometry(QRect(580, 510, 160, 111));
+        verticalLayout_9 = new QVBoxLayout(verticalLayoutWidget_7);
+        verticalLayout_9->setObjectName(QString::fromUtf8("verticalLayout_9"));
+        verticalLayout_9->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_20 = new QHBoxLayout();
+        horizontalLayout_20->setObjectName(QString::fromUtf8("horizontalLayout_20"));
+        label_3 = new QLabel(verticalLayoutWidget_7);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_20->addWidget(label_3);
+
+        rSlider = new QSlider(verticalLayoutWidget_7);
+        rSlider->setObjectName(QString::fromUtf8("rSlider"));
+        rSlider->setMaximum(255);
+        rSlider->setPageStep(15);
+        rSlider->setValue(255);
+        rSlider->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_20->addWidget(rSlider);
+
+
+        verticalLayout_9->addLayout(horizontalLayout_20);
+
+        horizontalLayout_22 = new QHBoxLayout();
+        horizontalLayout_22->setObjectName(QString::fromUtf8("horizontalLayout_22"));
+        label_8 = new QLabel(verticalLayoutWidget_7);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+        label_8->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_22->addWidget(label_8);
+
+        bSlider = new QSlider(verticalLayoutWidget_7);
+        bSlider->setObjectName(QString::fromUtf8("bSlider"));
+        bSlider->setMaximum(255);
+        bSlider->setPageStep(15);
+        bSlider->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_22->addWidget(bSlider);
+
+
+        verticalLayout_9->addLayout(horizontalLayout_22);
+
+        horizontalLayout_21 = new QHBoxLayout();
+        horizontalLayout_21->setObjectName(QString::fromUtf8("horizontalLayout_21"));
+        label_7 = new QLabel(verticalLayoutWidget_7);
+        label_7->setObjectName(QString::fromUtf8("label_7"));
+        label_7->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_21->addWidget(label_7);
+
+        gSlider = new QSlider(verticalLayoutWidget_7);
+        gSlider->setObjectName(QString::fromUtf8("gSlider"));
+        gSlider->setMaximum(255);
+        gSlider->setPageStep(15);
+        gSlider->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_21->addWidget(gSlider);
+
+
+        verticalLayout_9->addLayout(horizontalLayout_21);
+
+        horizontalLayout_17 = new QHBoxLayout();
+        horizontalLayout_17->setObjectName(QString::fromUtf8("horizontalLayout_17"));
+        R = new QLabel(verticalLayoutWidget_7);
+        R->setObjectName(QString::fromUtf8("R"));
+        R->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_17->addWidget(R);
+
+        color = new QLabel(verticalLayoutWidget_7);
+        color->setObjectName(QString::fromUtf8("color"));
+
+        horizontalLayout_17->addWidget(color);
+
+
+        verticalLayout_9->addLayout(horizontalLayout_17);
+
+        verticalLayoutWidget_9 = new QWidget(centralwidget);
+        verticalLayoutWidget_9->setObjectName(QString::fromUtf8("verticalLayoutWidget_9"));
+        verticalLayoutWidget_9->setGeometry(QRect(570, 20, 181, 141));
+        verticalLayout_11 = new QVBoxLayout(verticalLayoutWidget_9);
+        verticalLayout_11->setObjectName(QString::fromUtf8("verticalLayout_11"));
+        verticalLayout_11->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        button = new QLabel(layoutWidget);
-        button->setObjectName(QString::fromUtf8("button"));
+        label_6 = new QLabel(verticalLayoutWidget_9);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
 
-        horizontalLayout_2->addWidget(button);
+        horizontalLayout_2->addWidget(label_6);
+
+        coord = new QLabel(verticalLayoutWidget_9);
+        coord->setObjectName(QString::fromUtf8("coord"));
+
+        horizontalLayout_2->addWidget(coord);
 
 
-        verticalLayout_2->addLayout(horizontalLayout_2);
+        verticalLayout_11->addLayout(horizontalLayout_2);
 
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
+        label_5 = new QLabel(verticalLayoutWidget_9);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+
+        horizontalLayout_6->addWidget(label_5);
+
+        press = new QLabel(verticalLayoutWidget_9);
+        press->setObjectName(QString::fromUtf8("press"));
+
+        horizontalLayout_6->addWidget(press);
+
+
+        verticalLayout_11->addLayout(horizontalLayout_6);
+
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        radioButton = new QRadioButton(layoutWidget);
+        radioButton = new QRadioButton(verticalLayoutWidget_9);
         radioButton->setObjectName(QString::fromUtf8("radioButton"));
         radioButton->setAutoExclusive(false);
 
         verticalLayout->addWidget(radioButton);
 
-        radioButton_2 = new QRadioButton(layoutWidget);
+        radioButton_2 = new QRadioButton(verticalLayoutWidget_9);
         radioButton_2->setObjectName(QString::fromUtf8("radioButton_2"));
         radioButton_2->setAutoExclusive(false);
 
@@ -166,326 +608,267 @@ public:
 
         verticalLayout_2->addLayout(verticalLayout);
 
-        layoutWidget1 = new QWidget(centralwidget);
-        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(580, 30, 176, 87));
-        verticalLayout_5 = new QVBoxLayout(layoutWidget1);
-        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
-        verticalLayout_5->setContentsMargins(0, 0, 0, 0);
-        verticalLayout_3 = new QVBoxLayout();
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        label_1 = new QLabel(layoutWidget1);
-        label_1->setObjectName(QString::fromUtf8("label_1"));
-
-        horizontalLayout_4->addWidget(label_1);
-
-        label_2 = new QLabel(layoutWidget1);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        horizontalLayout_4->addWidget(label_2);
-
-
-        verticalLayout_3->addLayout(horizontalLayout_4);
-
-        horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        pushButton_2 = new QPushButton(layoutWidget1);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-
-        horizontalLayout_5->addWidget(pushButton_2);
-
-        pushButton = new QPushButton(layoutWidget1);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-
-        horizontalLayout_5->addWidget(pushButton);
-
-
-        verticalLayout_3->addLayout(horizontalLayout_5);
-
-
-        verticalLayout_5->addLayout(verticalLayout_3);
-
-        pushButton_4 = new QPushButton(centralwidget);
-        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
-        pushButton_4->setGeometry(QRect(230, 570, 91, 31));
-        pushButton_5 = new QPushButton(centralwidget);
-        pushButton_5->setObjectName(QString::fromUtf8("pushButton_5"));
-        pushButton_5->setGeometry(QRect(580, 150, 174, 25));
-        pushButton_3 = new QPushButton(centralwidget);
-        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
-        pushButton_3->setGeometry(QRect(580, 120, 174, 25));
-        layoutWidget2 = new QWidget(centralwidget);
-        layoutWidget2->setObjectName(QString::fromUtf8("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(570, 410, 189, 53));
-        horizontalLayout_3 = new QHBoxLayout(layoutWidget2);
+        horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(layoutWidget2);
+        label = new QLabel(verticalLayoutWidget_9);
         label->setObjectName(QString::fromUtf8("label"));
 
         horizontalLayout_3->addWidget(label);
 
-        spinBox = new QSpinBox(layoutWidget2);
+        spinBox = new QSpinBox(verticalLayoutWidget_9);
         spinBox->setObjectName(QString::fromUtf8("spinBox"));
         spinBox->setMaximum(150);
-        spinBox->setValue(25);
+        spinBox->setValue(10);
 
         horizontalLayout_3->addWidget(spinBox);
 
-        coord = new QLabel(centralwidget);
-        coord->setObjectName(QString::fromUtf8("coord"));
-        coord->setGeometry(QRect(690, 280, 91, 22));
-        horizontalLayoutWidget = new QWidget(centralwidget);
-        horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(690, 190, 101, 51));
-        horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        label_3 = new QLabel(horizontalLayoutWidget);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
 
-        horizontalLayout->addWidget(label_3);
-
-        horizontalLayoutWidget_2 = new QWidget(centralwidget);
-        horizontalLayoutWidget_2->setObjectName(QString::fromUtf8("horizontalLayoutWidget_2"));
-        horizontalLayoutWidget_2->setGeometry(QRect(573, 190, 101, 51));
-        horizontalLayout_6 = new QHBoxLayout(horizontalLayoutWidget_2);
-        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
-        horizontalLayout_6->setContentsMargins(0, 0, 0, 0);
-        label_4 = new QLabel(horizontalLayoutWidget_2);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-
-        horizontalLayout_6->addWidget(label_4);
-
-        label_5 = new QLabel(centralwidget);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
-        label_5->setGeometry(QRect(770, 120, 121, 21));
-        label_6 = new QLabel(centralwidget);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
-        label_6->setGeometry(QRect(770, 150, 121, 21));
-        line = new QFrame(centralwidget);
-        line->setObjectName(QString::fromUtf8("line"));
-        line->setGeometry(QRect(860, 10, 20, 611));
-        line->setFrameShape(QFrame::VLine);
-        line->setFrameShadow(QFrame::Sunken);
-        verticalLayoutWidget = new QWidget(centralwidget);
-        verticalLayoutWidget->setObjectName(QString::fromUtf8("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(930, 60, 195, 111));
-        verticalLayout_4 = new QVBoxLayout(verticalLayoutWidget);
-        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-        verticalLayout_4->setContentsMargins(0, 0, 0, 0);
-        horizontalLayout_7 = new QHBoxLayout();
-        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
-        label_7 = new QLabel(verticalLayoutWidget);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
-
-        horizontalLayout_7->addWidget(label_7);
-
-        spinBox_2 = new QSpinBox(verticalLayoutWidget);
-        spinBox_2->setObjectName(QString::fromUtf8("spinBox_2"));
-        spinBox_2->setValue(10);
-
-        horizontalLayout_7->addWidget(spinBox_2);
+        verticalLayout_2->addLayout(horizontalLayout_3);
 
 
-        verticalLayout_4->addLayout(horizontalLayout_7);
+        verticalLayout_11->addLayout(verticalLayout_2);
 
-        comboBox = new QComboBox(verticalLayoutWidget);
+        label_26 = new QLabel(centralwidget);
+        label_26->setObjectName(QString::fromUtf8("label_26"));
+        label_26->setGeometry(QRect(580, 490, 158, 17));
+        label_26->setStyleSheet(QString::fromUtf8("font: 75 italic 11pt \"Ubuntu Condensed\";\n"
+"font-size: 14px;\n"
+"color: rgb(0, 0, 0);"));
+        label_26->setAlignment(Qt::AlignCenter);
+        verticalLayoutWidget_4 = new QWidget(centralwidget);
+        verticalLayoutWidget_4->setObjectName(QString::fromUtf8("verticalLayoutWidget_4"));
+        verticalLayoutWidget_4->setGeometry(QRect(570, 340, 186, 143));
+        verticalLayout_6 = new QVBoxLayout(verticalLayoutWidget_4);
+        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+        verticalLayout_6->setContentsMargins(0, 0, 0, 0);
+        label_25 = new QLabel(verticalLayoutWidget_4);
+        label_25->setObjectName(QString::fromUtf8("label_25"));
+        label_25->setStyleSheet(QString::fromUtf8("font: 75 italic 11pt \"Ubuntu Condensed\";\n"
+"font-size: 14px;\n"
+"color: rgb(0, 0, 0);"));
+        label_25->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_6->addWidget(label_25);
+
+        comboBox = new QComboBox(verticalLayoutWidget_4);
+        comboBox->addItem(QString());
         comboBox->addItem(QString());
         comboBox->addItem(QString());
         comboBox->addItem(QString());
         comboBox->setObjectName(QString::fromUtf8("comboBox"));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(comboBox->sizePolicy().hasHeightForWidth());
+        comboBox->setSizePolicy(sizePolicy);
+        comboBox->setLayoutDirection(Qt::LeftToRight);
+        comboBox->setAutoFillBackground(false);
+        comboBox->setStyleSheet(QString::fromUtf8("border: 0.5px solid rgb(100, 100, 100)\n"
+""));
+        comboBox->setInsertPolicy(QComboBox::InsertAlphabetically);
+        comboBox->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
 
-        verticalLayout_4->addWidget(comboBox);
+        verticalLayout_6->addWidget(comboBox);
 
         horizontalLayout_8 = new QHBoxLayout();
         horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
-        label_8 = new QLabel(verticalLayoutWidget);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
+        label_4 = new QLabel(verticalLayoutWidget_4);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setAlignment(Qt::AlignCenter);
 
-        horizontalLayout_8->addWidget(label_8);
+        horizontalLayout_8->addWidget(label_4);
 
-        label_9 = new QLabel(verticalLayoutWidget);
-        label_9->setObjectName(QString::fromUtf8("label_9"));
+        radius = new QSpinBox(verticalLayoutWidget_4);
+        radius->setObjectName(QString::fromUtf8("radius"));
+        radius->setValue(15);
 
-        horizontalLayout_8->addWidget(label_9);
+        horizontalLayout_8->addWidget(radius);
 
 
-        verticalLayout_4->addLayout(horizontalLayout_8);
+        verticalLayout_6->addLayout(horizontalLayout_8);
 
-        label_10 = new QLabel(centralwidget);
-        label_10->setObjectName(QString::fromUtf8("label_10"));
-        label_10->setGeometry(QRect(936, 29, 191, 21));
-        horizontalLayoutWidget_5 = new QWidget(centralwidget);
-        horizontalLayoutWidget_5->setObjectName(QString::fromUtf8("horizontalLayoutWidget_5"));
-        horizontalLayoutWidget_5->setGeometry(QRect(570, 510, 191, 31));
-        horizontalLayout_9 = new QHBoxLayout(horizontalLayoutWidget_5);
-        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
-        horizontalLayout_9->setContentsMargins(0, 0, 0, 0);
-        label_11 = new QLabel(horizontalLayoutWidget_5);
-        label_11->setObjectName(QString::fromUtf8("label_11"));
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        pushButton_2 = new QPushButton(verticalLayoutWidget_4);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
 
-        horizontalLayout_9->addWidget(label_11);
+        horizontalLayout_4->addWidget(pushButton_2);
 
-        rSlider = new QSlider(horizontalLayoutWidget_5);
-        rSlider->setObjectName(QString::fromUtf8("rSlider"));
-        rSlider->setMaximum(255);
-        rSlider->setOrientation(Qt::Horizontal);
+        center = new QLabel(verticalLayoutWidget_4);
+        center->setObjectName(QString::fromUtf8("center"));
+        center->setAlignment(Qt::AlignCenter);
 
-        horizontalLayout_9->addWidget(rSlider);
+        horizontalLayout_4->addWidget(center);
 
-        horizontalLayoutWidget_6 = new QWidget(centralwidget);
-        horizontalLayoutWidget_6->setObjectName(QString::fromUtf8("horizontalLayoutWidget_6"));
-        horizontalLayoutWidget_6->setGeometry(QRect(570, 540, 191, 31));
-        horizontalLayout_10 = new QHBoxLayout(horizontalLayoutWidget_6);
-        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
-        horizontalLayout_10->setContentsMargins(0, 0, 0, 0);
-        label_12 = new QLabel(horizontalLayoutWidget_6);
-        label_12->setObjectName(QString::fromUtf8("label_12"));
 
-        horizontalLayout_10->addWidget(label_12);
+        verticalLayout_6->addLayout(horizontalLayout_4);
 
-        bSlider = new QSlider(horizontalLayoutWidget_6);
-        bSlider->setObjectName(QString::fromUtf8("bSlider"));
-        bSlider->setMaximum(255);
-        bSlider->setValue(150);
-        bSlider->setOrientation(Qt::Horizontal);
-
-        horizontalLayout_10->addWidget(bSlider);
-
-        horizontalLayoutWidget_7 = new QWidget(centralwidget);
-        horizontalLayoutWidget_7->setObjectName(QString::fromUtf8("horizontalLayoutWidget_7"));
-        horizontalLayoutWidget_7->setGeometry(QRect(570, 570, 191, 31));
-        horizontalLayout_11 = new QHBoxLayout(horizontalLayoutWidget_7);
-        horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
-        horizontalLayout_11->setContentsMargins(0, 0, 0, 0);
-        label_13 = new QLabel(horizontalLayoutWidget_7);
-        label_13->setObjectName(QString::fromUtf8("label_13"));
-
-        horizontalLayout_11->addWidget(label_13);
-
-        gSlider = new QSlider(horizontalLayoutWidget_7);
-        gSlider->setObjectName(QString::fromUtf8("gSlider"));
-        gSlider->setMaximum(255);
-        gSlider->setOrientation(Qt::Horizontal);
-
-        horizontalLayout_11->addWidget(gSlider);
-
-        label_14 = new QLabel(centralwidget);
-        label_14->setObjectName(QString::fromUtf8("label_14"));
-        label_14->setGeometry(QRect(630, 480, 67, 17));
-        pushButton_6 = new QPushButton(centralwidget);
+        pushButton_6 = new QPushButton(verticalLayoutWidget_4);
         pushButton_6->setObjectName(QString::fromUtf8("pushButton_6"));
-        pushButton_6->setGeometry(QRect(930, 170, 201, 25));
-        horizontalLayoutWidget_8 = new QWidget(centralwidget);
-        horizontalLayoutWidget_8->setObjectName(QString::fromUtf8("horizontalLayoutWidget_8"));
-        horizontalLayoutWidget_8->setGeometry(QRect(930, 200, 191, 31));
-        horizontalLayout_12 = new QHBoxLayout(horizontalLayoutWidget_8);
-        horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
-        horizontalLayout_12->setContentsMargins(0, 0, 0, 0);
-        label_15 = new QLabel(horizontalLayoutWidget_8);
-        label_15->setObjectName(QString::fromUtf8("label_15"));
 
-        horizontalLayout_12->addWidget(label_15);
+        verticalLayout_6->addWidget(pushButton_6);
 
-        label_16 = new QLabel(horizontalLayoutWidget_8);
-        label_16->setObjectName(QString::fromUtf8("label_16"));
-
-        horizontalLayout_12->addWidget(label_16);
-
-        label_17 = new QLabel(centralwidget);
-        label_17->setObjectName(QString::fromUtf8("label_17"));
-        label_17->setGeometry(QRect(570, 610, 67, 17));
-        showColor = new QLabel(centralwidget);
-        showColor->setObjectName(QString::fromUtf8("showColor"));
-        showColor->setGeometry(QRect(630, 610, 111, 20));
+        line = new QFrame(centralwidget);
+        line->setObjectName(QString::fromUtf8("line"));
+        line->setGeometry(QRect(763, 10, 20, 611));
+        line->setFrameShape(QFrame::VLine);
+        line->setFrameShadow(QFrame::Sunken);
         line_2 = new QFrame(centralwidget);
         line_2->setObjectName(QString::fromUtf8("line_2"));
-        line_2->setGeometry(QRect(880, 310, 321, 20));
-        line_2->setFrameShape(QFrame::HLine);
+        line_2->setGeometry(QRect(990, 20, 20, 611));
+        line_2->setFrameShape(QFrame::VLine);
         line_2->setFrameShadow(QFrame::Sunken);
-        label_18 = new QLabel(centralwidget);
-        label_18->setObjectName(QString::fromUtf8("label_18"));
-        label_18->setGeometry(QRect(940, 340, 191, 21));
-        horizontalLayoutWidget_10 = new QWidget(centralwidget);
-        horizontalLayoutWidget_10->setObjectName(QString::fromUtf8("horizontalLayoutWidget_10"));
-        horizontalLayoutWidget_10->setGeometry(QRect(920, 380, 193, 36));
-        horizontalLayout_14 = new QHBoxLayout(horizontalLayoutWidget_10);
-        horizontalLayout_14->setObjectName(QString::fromUtf8("horizontalLayout_14"));
-        horizontalLayout_14->setContentsMargins(0, 0, 0, 0);
-        label_21 = new QLabel(horizontalLayoutWidget_10);
-        label_21->setObjectName(QString::fromUtf8("label_21"));
+        verticalLayoutWidget_8 = new QWidget(centralwidget);
+        verticalLayoutWidget_8->setObjectName(QString::fromUtf8("verticalLayoutWidget_8"));
+        verticalLayoutWidget_8->setGeometry(QRect(780, 40, 201, 176));
+        verticalLayout_10 = new QVBoxLayout(verticalLayoutWidget_8);
+        verticalLayout_10->setObjectName(QString::fromUtf8("verticalLayout_10"));
+        verticalLayout_10->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
+        pushButton = new QPushButton(verticalLayoutWidget_8);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
 
-        horizontalLayout_14->addWidget(label_21);
+        horizontalLayout_10->addWidget(pushButton);
 
-        spinBox_3 = new QSpinBox(horizontalLayoutWidget_10);
-        spinBox_3->setObjectName(QString::fromUtf8("spinBox_3"));
-        spinBox_3->setValue(10);
+        center_2 = new QLabel(verticalLayoutWidget_8);
+        center_2->setObjectName(QString::fromUtf8("center_2"));
+        center_2->setAlignment(Qt::AlignCenter);
 
-        horizontalLayout_14->addWidget(spinBox_3);
+        horizontalLayout_10->addWidget(center_2);
 
-        horizontalLayoutWidget_11 = new QWidget(centralwidget);
-        horizontalLayoutWidget_11->setObjectName(QString::fromUtf8("horizontalLayoutWidget_11"));
-        horizontalLayoutWidget_11->setGeometry(QRect(920, 410, 193, 36));
-        horizontalLayout_15 = new QHBoxLayout(horizontalLayoutWidget_11);
-        horizontalLayout_15->setObjectName(QString::fromUtf8("horizontalLayout_15"));
-        horizontalLayout_15->setContentsMargins(0, 0, 0, 0);
-        label_22 = new QLabel(horizontalLayoutWidget_11);
-        label_22->setObjectName(QString::fromUtf8("label_22"));
 
-        horizontalLayout_15->addWidget(label_22);
+        verticalLayout_10->addLayout(horizontalLayout_10);
 
-        spinBox_4 = new QSpinBox(horizontalLayoutWidget_11);
-        spinBox_4->setObjectName(QString::fromUtf8("spinBox_4"));
-        spinBox_4->setValue(10);
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        label_9 = new QLabel(verticalLayoutWidget_8);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+        label_9->setAlignment(Qt::AlignCenter);
 
-        horizontalLayout_15->addWidget(spinBox_4);
+        horizontalLayout->addWidget(label_9);
 
-        horizontalLayoutWidget_12 = new QWidget(centralwidget);
-        horizontalLayoutWidget_12->setObjectName(QString::fromUtf8("horizontalLayoutWidget_12"));
-        horizontalLayoutWidget_12->setGeometry(QRect(920, 470, 193, 36));
-        horizontalLayout_16 = new QHBoxLayout(horizontalLayoutWidget_12);
-        horizontalLayout_16->setObjectName(QString::fromUtf8("horizontalLayout_16"));
-        horizontalLayout_16->setContentsMargins(0, 0, 0, 0);
-        label_23 = new QLabel(horizontalLayoutWidget_12);
-        label_23->setObjectName(QString::fromUtf8("label_23"));
+        major = new QSpinBox(verticalLayoutWidget_8);
+        major->setObjectName(QString::fromUtf8("major"));
+        major->setValue(18);
 
-        horizontalLayout_16->addWidget(label_23);
+        horizontalLayout->addWidget(major);
 
-        label_24 = new QLabel(horizontalLayoutWidget_12);
-        label_24->setObjectName(QString::fromUtf8("label_24"));
 
-        horizontalLayout_16->addWidget(label_24);
+        verticalLayout_10->addLayout(horizontalLayout);
 
-        comboBox_2 = new QComboBox(centralwidget);
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
+        label_10 = new QLabel(verticalLayoutWidget_8);
+        label_10->setObjectName(QString::fromUtf8("label_10"));
+        label_10->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_7->addWidget(label_10);
+
+        minor = new QSpinBox(verticalLayoutWidget_8);
+        minor->setObjectName(QString::fromUtf8("minor"));
+        minor->setValue(12);
+
+        horizontalLayout_7->addWidget(minor);
+
+
+        verticalLayout_10->addLayout(horizontalLayout_7);
+
+        comboBox_2 = new QComboBox(verticalLayoutWidget_8);
+        comboBox_2->addItem(QString());
         comboBox_2->addItem(QString());
         comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
-        comboBox_2->setGeometry(QRect(920, 440, 193, 25));
-        horizontalLayoutWidget_9 = new QWidget(centralwidget);
-        horizontalLayoutWidget_9->setObjectName(QString::fromUtf8("horizontalLayoutWidget_9"));
-        horizontalLayoutWidget_9->setGeometry(QRect(920, 540, 191, 31));
-        horizontalLayout_13 = new QHBoxLayout(horizontalLayoutWidget_9);
-        horizontalLayout_13->setObjectName(QString::fromUtf8("horizontalLayout_13"));
-        horizontalLayout_13->setContentsMargins(0, 0, 0, 0);
-        label_19 = new QLabel(horizontalLayoutWidget_9);
-        label_19->setObjectName(QString::fromUtf8("label_19"));
+        comboBox_2->setStyleSheet(QString::fromUtf8("border: 0.5px solid rgb(100, 100, 100)\n"
+""));
 
-        horizontalLayout_13->addWidget(label_19);
+        verticalLayout_10->addWidget(comboBox_2);
 
-        label_20 = new QLabel(horizontalLayoutWidget_9);
-        label_20->setObjectName(QString::fromUtf8("label_20"));
-
-        horizontalLayout_13->addWidget(label_20);
-
-        pushButton_7 = new QPushButton(centralwidget);
+        pushButton_7 = new QPushButton(verticalLayoutWidget_8);
         pushButton_7->setObjectName(QString::fromUtf8("pushButton_7"));
-        pushButton_7->setGeometry(QRect(920, 510, 191, 25));
+
+        verticalLayout_10->addWidget(pushButton_7);
+
+        label_27 = new QLabel(centralwidget);
+        label_27->setObjectName(QString::fromUtf8("label_27"));
+        label_27->setGeometry(QRect(820, 10, 111, 21));
+        label_27->setStyleSheet(QString::fromUtf8("font: 75 italic 11pt \"Ubuntu Condensed\";\n"
+"font-size: 14px;\n"
+"color: rgb(0, 0, 0);"));
+        label_27->setAlignment(Qt::AlignCenter);
+        line_3 = new QFrame(centralwidget);
+        line_3->setObjectName(QString::fromUtf8("line_3"));
+        line_3->setGeometry(QRect(790, 255, 201, 21));
+        line_3->setFrameShape(QFrame::HLine);
+        line_3->setFrameShadow(QFrame::Sunken);
+        line_4 = new QFrame(centralwidget);
+        line_4->setObjectName(QString::fromUtf8("line_4"));
+        line_4->setGeometry(QRect(1000, 420, 201, 21));
+        line_4->setFrameShape(QFrame::HLine);
+        line_4->setFrameShadow(QFrame::Sunken);
+        horizontalLayoutWidget_21 = new QWidget(centralwidget);
+        horizontalLayoutWidget_21->setObjectName(QString::fromUtf8("horizontalLayoutWidget_21"));
+        horizontalLayoutWidget_21->setGeometry(QRect(790, 560, 191, 23));
+        horizontalLayout_23 = new QHBoxLayout(horizontalLayoutWidget_21);
+        horizontalLayout_23->setObjectName(QString::fromUtf8("horizontalLayout_23"));
+        horizontalLayout_23->setContentsMargins(0, 0, 0, 0);
+        R_2 = new QLabel(horizontalLayoutWidget_21);
+        R_2->setObjectName(QString::fromUtf8("R_2"));
+        R_2->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_23->addWidget(R_2);
+
+        polygonTime = new QLabel(horizontalLayoutWidget_21);
+        polygonTime->setObjectName(QString::fromUtf8("polygonTime"));
+
+        horizontalLayout_23->addWidget(polygonTime);
+
+        horizontalLayoutWidget_22 = new QWidget(centralwidget);
+        horizontalLayoutWidget_22->setObjectName(QString::fromUtf8("horizontalLayoutWidget_22"));
+        horizontalLayoutWidget_22->setGeometry(QRect(780, 220, 201, 23));
+        horizontalLayout_24 = new QHBoxLayout(horizontalLayoutWidget_22);
+        horizontalLayout_24->setObjectName(QString::fromUtf8("horizontalLayout_24"));
+        horizontalLayout_24->setContentsMargins(0, 0, 0, 0);
+        R_3 = new QLabel(horizontalLayoutWidget_22);
+        R_3->setObjectName(QString::fromUtf8("R_3"));
+        R_3->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_24->addWidget(R_3);
+
+        ellipseTime = new QLabel(horizontalLayoutWidget_22);
+        ellipseTime->setObjectName(QString::fromUtf8("ellipseTime"));
+
+        horizontalLayout_24->addWidget(ellipseTime);
+
+        horizontalLayoutWidget_23 = new QWidget(centralwidget);
+        horizontalLayoutWidget_23->setObjectName(QString::fromUtf8("horizontalLayoutWidget_23"));
+        horizontalLayoutWidget_23->setGeometry(QRect(1020, 380, 161, 23));
+        horizontalLayout_25 = new QHBoxLayout(horizontalLayoutWidget_23);
+        horizontalLayout_25->setObjectName(QString::fromUtf8("horizontalLayout_25"));
+        horizontalLayout_25->setContentsMargins(0, 0, 0, 0);
+        R_4 = new QLabel(horizontalLayoutWidget_23);
+        R_4->setObjectName(QString::fromUtf8("R_4"));
+        R_4->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_25->addWidget(R_4);
+
+        transformationTime = new QLabel(horizontalLayoutWidget_23);
+        transformationTime->setObjectName(QString::fromUtf8("transformationTime"));
+
+        horizontalLayout_25->addWidget(transformationTime);
+
         MainWindow->setCentralWidget(centralwidget);
+        menubar = new QMenuBar(MainWindow);
+        menubar->setObjectName(QString::fromUtf8("menubar"));
+        menubar->setGeometry(QRect(0, 0, 1210, 22));
+        menuCreate_New = new QMenu(menubar);
+        menuCreate_New->setObjectName(QString::fromUtf8("menuCreate_New"));
+        menuCreate_New->setStyleSheet(QString::fromUtf8(""));
+        MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
+
+        menubar->addAction(menuCreate_New->menuAction());
 
         retranslateUi(MainWindow);
 
@@ -495,50 +878,80 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        actionCreate_New->setText(QCoreApplication::translate("MainWindow", "Create New", nullptr));
-        button->setText(QCoreApplication::translate("MainWindow", "Mouse Position", nullptr));
+        pushButton_5->setText(QCoreApplication::translate("MainWindow", "Reset", nullptr));
+        label_20->setText(QCoreApplication::translate("MainWindow", "Transformation", nullptr));
+        label_21->setText(QCoreApplication::translate("MainWindow", "ScaleX ", nullptr));
+        scalex->setPrefix(QString());
+        label_22->setText(QCoreApplication::translate("MainWindow", "ScaleY ", nullptr));
+        pushButton_scale->setText(QCoreApplication::translate("MainWindow", "Scale ", nullptr));
+        label_15->setText(QCoreApplication::translate("MainWindow", "Trans X axis ", nullptr));
+        label_19->setText(QCoreApplication::translate("MainWindow", "Trans Y axis ", nullptr));
+        pushButton_translate->setText(QCoreApplication::translate("MainWindow", "Translate", nullptr));
+        label_23->setText(QCoreApplication::translate("MainWindow", "Angle:   ", nullptr));
+        pushButton_rotate->setText(QCoreApplication::translate("MainWindow", "Rotate", nullptr));
+        pushButton_reflect->setText(QCoreApplication::translate("MainWindow", "Reflect", nullptr));
+        label_28->setText(QCoreApplication::translate("MainWindow", "Lines", nullptr));
+        pushButton_11->setText(QCoreApplication::translate("MainWindow", "Set Point 1", nullptr));
+        point1->setText(QCoreApplication::translate("MainWindow", "Point 1", nullptr));
+        pushButton_10->setText(QCoreApplication::translate("MainWindow", "Set Point 2", nullptr));
+        point2->setText(QCoreApplication::translate("MainWindow", "Point 2", nullptr));
+        comboBox_4->setItemText(0, QCoreApplication::translate("MainWindow", "   Bresenham", nullptr));
+        comboBox_4->setItemText(1, QCoreApplication::translate("MainWindow", "   DDA", nullptr));
+        comboBox_4->setItemText(2, QCoreApplication::translate("MainWindow", "   Parametric", nullptr));
+
+        pushButton_line->setText(QCoreApplication::translate("MainWindow", "Draw Line", nullptr));
+        label_14->setText(QCoreApplication::translate("MainWindow", "Vertices", nullptr));
+        pushButton_8->setText(QCoreApplication::translate("MainWindow", "Set Vertices", nullptr));
+        pushButton_9->setText(QCoreApplication::translate("MainWindow", "Draw Polygon", nullptr));
+        pushButton_3->setText(QCoreApplication::translate("MainWindow", "Seed", nullptr));
+        seed->setText(QString());
+        polygonStart->setText(QCoreApplication::translate("MainWindow", "Start Point", nullptr));
+        polygonEnd->setText(QCoreApplication::translate("MainWindow", "End Point", nullptr));
+        comboBox_3->setItemText(0, QCoreApplication::translate("MainWindow", "   Boundary Fill", nullptr));
+        comboBox_3->setItemText(1, QCoreApplication::translate("MainWindow", "   Flood Fill ", nullptr));
+        comboBox_3->setItemText(2, QCoreApplication::translate("MainWindow", "   ScanLine Fill", nullptr));
+
+        pushButton_4->setText(QCoreApplication::translate("MainWindow", "Fill Polygon", nullptr));
+        label_24->setText(QCoreApplication::translate("MainWindow", "Polygon", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "Red", nullptr));
+        label_8->setText(QCoreApplication::translate("MainWindow", "Blue", nullptr));
+        label_7->setText(QCoreApplication::translate("MainWindow", "Green", nullptr));
+        R->setText(QCoreApplication::translate("MainWindow", "Color :", nullptr));
+        color->setText(QCoreApplication::translate("MainWindow", "rbg(255,0,0)", nullptr));
+        label_6->setText(QCoreApplication::translate("MainWindow", "Mouse Pos:", nullptr));
+        coord->setText(QString());
+        label_5->setText(QCoreApplication::translate("MainWindow", "Last Pressed", nullptr));
+        press->setText(QString());
         radioButton->setText(QCoreApplication::translate("MainWindow", "Show Axis", nullptr));
         radioButton_2->setText(QCoreApplication::translate("MainWindow", "Show Grid", nullptr));
-        label_1->setText(QCoreApplication::translate("MainWindow", "Point 1", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "Point 2", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("MainWindow", "Set Point 1", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "Set Point 2", nullptr));
-        pushButton_4->setText(QCoreApplication::translate("MainWindow", "Reset", nullptr));
-        pushButton_5->setText(QCoreApplication::translate("MainWindow", "Bresh Draw line", nullptr));
-        pushButton_3->setText(QCoreApplication::translate("MainWindow", "DDA draw line", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "   Set Pixel", nullptr));
-        coord->setText(QString());
-        label_3->setText(QString());
-        label_4->setText(QCoreApplication::translate("MainWindow", "Recent Point", nullptr));
-        label_5->setText(QCoreApplication::translate("MainWindow", "DDA time", nullptr));
-        label_6->setText(QCoreApplication::translate("MainWindow", "Bresh time", nullptr));
-        label_7->setText(QCoreApplication::translate("MainWindow", "Radius", nullptr));
-        comboBox->setItemText(0, QCoreApplication::translate("MainWindow", "Midpoint", nullptr));
-        comboBox->setItemText(1, QCoreApplication::translate("MainWindow", "Breshenham's Midpoint", nullptr));
-        comboBox->setItemText(2, QCoreApplication::translate("MainWindow", "Polar Coordinate", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Pixel Size", nullptr));
+        label_26->setText(QCoreApplication::translate("MainWindow", "Colours", nullptr));
+        label_25->setText(QCoreApplication::translate("MainWindow", "Circle", nullptr));
+        comboBox->setItemText(0, QCoreApplication::translate("MainWindow", "   Parametric", nullptr));
+        comboBox->setItemText(1, QCoreApplication::translate("MainWindow", "   Polar Coordinates", nullptr));
+        comboBox->setItemText(2, QCoreApplication::translate("MainWindow", "   Mid Point", nullptr));
+        comboBox->setItemText(3, QCoreApplication::translate("MainWindow", "   Bresenham's Midpoint", nullptr));
 
-        label_8->setText(QCoreApplication::translate("MainWindow", "Center:", nullptr));
-        label_9->setText(QString());
-        label_10->setText(QCoreApplication::translate("MainWindow", "                   CIRCLE", nullptr));
-        label_11->setText(QCoreApplication::translate("MainWindow", "Red", nullptr));
-        label_12->setText(QCoreApplication::translate("MainWindow", "Blue", nullptr));
-        label_13->setText(QCoreApplication::translate("MainWindow", "Green", nullptr));
-        label_14->setText(QCoreApplication::translate("MainWindow", "Set Color", nullptr));
+        label_4->setText(QCoreApplication::translate("MainWindow", "Radius", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("MainWindow", "Set Center", nullptr));
+        center->setText(QCoreApplication::translate("MainWindow", "Center", nullptr));
         pushButton_6->setText(QCoreApplication::translate("MainWindow", "Draw Circle", nullptr));
-        label_15->setText(QCoreApplication::translate("MainWindow", "      Time", nullptr));
-        label_16->setText(QString());
-        label_17->setText(QCoreApplication::translate("MainWindow", "Colour", nullptr));
-        showColor->setText(QString());
-        label_18->setText(QCoreApplication::translate("MainWindow", "                   Ellipse", nullptr));
-        label_21->setText(QCoreApplication::translate("MainWindow", "Major Axis", nullptr));
-        label_22->setText(QCoreApplication::translate("MainWindow", "Minoe Axis", nullptr));
-        label_23->setText(QCoreApplication::translate("MainWindow", "Center:", nullptr));
-        label_24->setText(QString());
-        comboBox_2->setItemText(0, QCoreApplication::translate("MainWindow", "Midpoint", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWindow", "Set Center", nullptr));
+        center_2->setText(QCoreApplication::translate("MainWindow", "Ellipse Center", nullptr));
+        label_9->setText(QCoreApplication::translate("MainWindow", "Major-R", nullptr));
+        label_10->setText(QCoreApplication::translate("MainWindow", "Minor-R", nullptr));
+        comboBox_2->setItemText(0, QCoreApplication::translate("MainWindow", "   Polar Coordinate", nullptr));
+        comboBox_2->setItemText(1, QCoreApplication::translate("MainWindow", "   Midpoint", nullptr));
 
-        label_19->setText(QCoreApplication::translate("MainWindow", "      Time", nullptr));
-        label_20->setText(QString());
         pushButton_7->setText(QCoreApplication::translate("MainWindow", "Draw Ellipse", nullptr));
+        label_27->setText(QCoreApplication::translate("MainWindow", "Ellipse", nullptr));
+        R_2->setText(QCoreApplication::translate("MainWindow", "Time:", nullptr));
+        polygonTime->setText(QCoreApplication::translate("MainWindow", " Polygon Time", nullptr));
+        R_3->setText(QCoreApplication::translate("MainWindow", "Time:", nullptr));
+        ellipseTime->setText(QCoreApplication::translate("MainWindow", " Ellipse Time", nullptr));
+        R_4->setText(QCoreApplication::translate("MainWindow", "Time:", nullptr));
+        transformationTime->setText(QString());
+        menuCreate_New->setTitle(QCoreApplication::translate("MainWindow", "View", nullptr));
     } // retranslateUi
 
 };

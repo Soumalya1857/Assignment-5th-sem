@@ -12,6 +12,12 @@
 #include <QPen>
 #include <QBrush>
 #include <QPair>
+#include <QElapsedTimer>
+#include <QTextStream>
+#include <QRgb>
+#include <QImage>
+#include <QTimer>
+
 class frame_widget : public QFrame
 {
     Q_OBJECT
@@ -42,6 +48,14 @@ private:
     QColor currentcol;
     QPoint convertCoord(int x, int y);
 
+    // polygon drawing
+    QList <QPoint> clickedPoints;
+    int polygonVertices;
+    QImage img;
+    bool polygonStart;
+    bool seed;
+    QPoint seedpoint;
+
 
 public:
     frame_widget(QWidget *parent = nullptr);
@@ -60,10 +74,19 @@ public:
     QPoint setPoint2();
     //void changeCurrentColour(QColor q);
     void drawLineDDA();
+    void drawLineDDA(QPoint, QPoint);
     void drawLineBresh();
     void drawCircle(int,int);
     void drawEllipse(int ,int);
     void changeCurrentColour(int a, char c);
+    void createPolygon(int);
+    void destroyPolygon(int);
+    void drawPolygon();
+    void setSeed();
+    void boundary_fill();
+    void flood_fill();
+    void scanLine_fill();
+
 
 
 signals:
@@ -74,6 +97,14 @@ signals:
     void sendCircleTime(double);
     void sendEllipseTime(double);
     void sendColorLabel(int,int,int);
+    // fill n drawing algo
+    void startPolygon();
+    void endPolygon();
+    void sendTime(double);
+    void displayPolygonEnd(int,int);
+    void displayPolygonStart(int,int);
+    void sendSeed(int,int);
+    void showPoint(int x, int y, int noOfClicks);
 };
 
 #endif // FRAME_WIDGET_H

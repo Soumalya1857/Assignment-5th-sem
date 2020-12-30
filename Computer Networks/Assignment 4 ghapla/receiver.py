@@ -3,7 +3,7 @@ import random
 import time
 import threading
 import sys
-#sys.path.append('../package')
+sys.path.append('../Assignment 4')
 import const
 
 
@@ -15,6 +15,8 @@ class Receiver:
         self.waitTillReceived   = waitTillReceived
         self.senderToReceive    = self.selectSender()
         self.codeLength         = len(self.walshTable[0])
+        self.totalBitReceived   = 0
+
 
     def selectSender(self):
         num = random.randint(0, const.totalSenderNumber-1)
@@ -27,7 +29,7 @@ class Receiver:
         print("Data:" + str(data))
         string = ''.join(data)
         character = chr(int(string,2))
-        print("Char received: " + character)
+        print("(Receiver{}:)Char received: {}".format(self.name+1, character))
         return character
     
     def openFile(self, sender):
@@ -40,6 +42,7 @@ class Receiver:
     
     def receiveData(self):
         print("(Receiver{}:) Receiver{} receives data from sender{}".format(self.name+1,self.name+1,self.senderToReceive+1))
+        startTime = time.time()
         totalData = []
         while True:
             channelData = self.channelToReceiver.recv()
@@ -61,6 +64,20 @@ class Receiver:
             if len(totalData) < 8 and bit != -1:
                 # add the bit to totalData 
                 totalData.append(str(bit))
+
+                # if totalData is full get the character
+                if len(totalData) == 8:
+                    character = self.getCharacter(totalData)
+                    outFile = self.openFile(self.senderToReceive)
+                    outFile.write(character)
+                    outFile.close()
+                    totalData = []
+                    self.totalBitReceived += 1
+                    endTime = time.time()
+                    print("(Receiver{}) Time elasped till now: {}s".format(self.name+1, str(endTime-startTime)[:5]))
+                    print("(Receiver{}) Bit received till now: {}".format(self.name+1, self.totalBitReceived))
+
+
             elif len(totalData) < 8 and bit == -1:
                 self.doNothing()
             else:

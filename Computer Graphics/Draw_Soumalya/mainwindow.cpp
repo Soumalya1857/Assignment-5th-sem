@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent):
     setWindowTitle("Grid");
     //setAutoFillBackground(true);
     //resize(520, 550);
-    setStyleSheet("background-color:pink;");
+    //setStyleSheet("background-color:pink;");
     connect(ui->frame, &frame_widget::sendCoord, this, &MainWindow::showCoord);
 
     // all times showns here
@@ -33,10 +33,15 @@ MainWindow::MainWindow(QWidget *parent):
 
 
     // all drawings
-    connect(this, &MainWindow::drawLinePressedDDA, ui->frame, &frame_widget::drawLineDDA);
+    //connect(this, &MainWindow::drawLinePressedDDA, ui->frame, &frame_widget::drawLineDDA);
     connect(this, &MainWindow::drawLinePressedBresh, ui->frame, &frame_widget::drawLineBresh);
     connect(this, &MainWindow::drawCircle, ui->frame, &frame_widget::drawCircle);
     connect(this, &MainWindow::drawEllipse, ui->frame, &frame_widget::drawEllipse);
+
+    // fill algos
+    connect(ui->frame, &frame_widget::showPoint, this, &MainWindow::showVertices);
+    connect(ui->frame, &frame_widget::sendSeed, this, &MainWindow::showSeed);
+    connect(ui->frame, &frame_widget::sendTime, this, &MainWindow::showFillTime);
 
   }
 
@@ -137,6 +142,11 @@ void MainWindow::showEllipseTime(double val)
 {
     double time = val/1000;
     ui->label_20->setText(QString::number(time) +" ms");
+}
+
+void MainWindow::showFillTime(double time)
+{
+    ui->label_29->setText(QString::number(time) +" ms");
 }
 
 void MainWindow::on_spinBox_valueChanged(int arg1)
@@ -250,3 +260,69 @@ void MainWindow::on_pushButton_7_clicked()
     int minor = ui->spinBox_4->value();
     emit drawEllipse(major,minor);
 }
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    ui->frame->drawPolygon();
+}
+
+void MainWindow::on_pushButton_8_clicked()
+{
+    ui->frame->createPolygon(ui->spinBox_5->value());
+}
+
+
+void MainWindow::on_pushButton_11_clicked()
+{
+    int x = ui->comboBox_3->currentIndex();
+    if(x==1) ui->frame->boundary_fill();
+    else if(x==0) ui->frame->flood_fill();
+    else ui->frame->scanLine_fill();
+}
+
+void MainWindow::on_pushButton_10_clicked()
+{
+    ui->frame->setSeed();
+}
+
+void MainWindow::on_spinBox_5_valueChanged(int arg1)
+{
+    ui->frame->destroyPolygon(arg1);
+}
+
+void MainWindow::showVertices(int x, int y, int pointNumber)
+{
+    ui->label_31->setText("Vertex "+QString::number(pointNumber));
+    ui->label_32->setText("X:"+QString::number(x)+ " Y:"+QString::number(y));
+}
+
+void MainWindow::showSeed(int x, int y)
+{
+    ui->label_27->setText("X:"+QString::number(x)+ " Y:"+QString::number(y));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
