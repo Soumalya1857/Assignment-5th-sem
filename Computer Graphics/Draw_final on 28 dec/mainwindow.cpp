@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent):
     connect(ui->frame, &frame_widget::sendSeed, this, &MainWindow::showSeed);
 
     // time functions added by soumalya
-    connect(ui->frame, &frame_widget::sendEllipseTime, this, &MainWindow::showEllipseTime);
+    //connect(ui->frame, &frame_widget::sendEllipseTime, this, &MainWindow::showEllipseTime);
 
 }
 
@@ -97,10 +97,10 @@ void MainWindow::showTime(int a)
     ui->transformationTime->setText(QString::number(a) + "μs");
 
 }
-void MainWindow::showEllipseTime(double a)
-{
-    ui->ellipseTime->setText(QString::number(a) + "μs");
-}
+//void MainWindow::showEllipseTime(double a)
+//{
+//    ui->ellipseTime->setText(QString::number(a) + "μs");
+//}
 
 void MainWindow::on_spinBox_valueChanged(int arg1)
 {
@@ -197,13 +197,13 @@ void MainWindow::on_pushButton_7_clicked()
     ui->frame->drawEllipse(r1, r2, x);
 }
 
-void MainWindow::on_pushButton_11_clicked()
+void MainWindow::on_pushButton_10_clicked()
 {
     QPoint p = ui->frame->setPoint1();
     ui->point1->setText("X : "+QString::number(p.x()) + " Y : " + QString::number(p.y()));
 }
 
-void MainWindow::on_pushButton_10_clicked()
+void MainWindow::on_pushButton_11_clicked()
 {
     QPoint p = ui->frame->setPoint2();
     ui->point2->setText("X : "+QString::number(p.x()) + " Y : " + QString::number(p.y()));
@@ -292,3 +292,19 @@ void MainWindow::on_pushButton_reflect_clicked()
 {
     ui->frame->reflect();
 }
+
+void MainWindow::on_pushButton_rect_clicked()
+{
+    ui->frame->drawRect();
+}
+
+void MainWindow::on_pushButton_clipL_clicked()
+{
+    ui->frame->clipLine();
+}
+
+void MainWindow::on_pushButton_clipP_clicked()
+{
+    ui->frame->clipPolygon();
+}
+
