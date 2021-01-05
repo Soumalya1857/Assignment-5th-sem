@@ -5,7 +5,7 @@ import threading
 from multiprocessing import Process, Lock, Event
 
 iteration = 10
-semaphore1 = Event()
+semaphore1 = Event(
 semaphore2 = Event()
 lock = Lock()
 

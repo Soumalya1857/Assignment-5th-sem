@@ -5,9 +5,6 @@ import os
 from multiprocessing import Process, Pipe
 
 listeners = 5
-def takeInput():
-    msg = input("Enter your String: ")
-    return msg
 
 #########################################################
 #########################################################
@@ -21,8 +18,8 @@ class BroadCaster:
         while True:
             print("-----------------------------------------------")
             # God knows why I am getting a error in this input statement
-            #msg = input("Enter your String: ")
-            msg = "Hola I am Broadcaster!"
+            msg = input("Enter your String: ")
+            #msg = "Hola I am Broadcaster!"
             print("-----------------------------------------------")
             for i in range(listeners):
                 self.broadCasterToListeners[i].send(msg)
@@ -91,7 +88,5 @@ def start():
     broadCastProcess.join()
 
 if __name__ == "__main__":
-    msg = input("Enterr: ")
-    print("your msg is : "+ msg)
     start()
 
