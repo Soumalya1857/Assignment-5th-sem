@@ -217,6 +217,7 @@ DIST          = /home/soumalya/Qt/5.15.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/soumalya/Qt/5.15.1/gcc_64/mkspecs/features/qt_config.prf \
 		/home/soumalya/Qt/5.15.1/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/home/soumalya/Qt/5.15.1/gcc_64/mkspecs/features/spec_post.prf \
+		../Draw_final on 28 dec/.qmake.stash \
 		/home/soumalya/Qt/5.15.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/home/soumalya/Qt/5.15.1/gcc_64/mkspecs/features/toolchain.prf \
 		/home/soumalya/Qt/5.15.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -408,6 +409,7 @@ Makefile: ../Draw_final\ on\ 28\ dec/Draw_final.pro /home/soumalya/Qt/5.15.1/gcc
 		/home/soumalya/Qt/5.15.1/gcc_64/mkspecs/features/qt_config.prf \
 		/home/soumalya/Qt/5.15.1/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/home/soumalya/Qt/5.15.1/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/home/soumalya/Qt/5.15.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/home/soumalya/Qt/5.15.1/gcc_64/mkspecs/features/toolchain.prf \
 		/home/soumalya/Qt/5.15.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -586,6 +588,7 @@ Makefile: ../Draw_final\ on\ 28\ dec/Draw_final.pro /home/soumalya/Qt/5.15.1/gcc
 /home/soumalya/Qt/5.15.1/gcc_64/mkspecs/features/qt_config.prf:
 /home/soumalya/Qt/5.15.1/gcc_64/mkspecs/linux-g++/qmake.conf:
 /home/soumalya/Qt/5.15.1/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /home/soumalya/Qt/5.15.1/gcc_64/mkspecs/features/exclusive_builds.prf:
 /home/soumalya/Qt/5.15.1/gcc_64/mkspecs/features/toolchain.prf:
 /home/soumalya/Qt/5.15.1/gcc_64/mkspecs/features/default_pre.prf:
